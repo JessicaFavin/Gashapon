@@ -1,0 +1,3 @@
+public Interface State {
+    //todo
+}
