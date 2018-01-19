@@ -32,6 +32,13 @@ public class SoldOutState implements State {
 		// throw SoldOutException ?
 		
 	}
+	
+	public void callRestockTeam() {
+		//call the restock team
+		this.vendingMachine.restockMachine();
+		//change to full state
+		this.vendingMachine.changeState(this.vendingMachine.getFullState());
+	}
 
 
 	

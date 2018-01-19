@@ -10,6 +10,7 @@ public class VendingMachine {
     private int amountToPay;
     private ArrayList<Integer> order;
     private boolean waitingForPayement;
+    private double changeToGiveBack;
 
     //list of all the states
     private State fullState;
@@ -25,6 +26,7 @@ public class VendingMachine {
         this.amountToPay = 0;
         this.order = new ArrayList<Integer>();
         this.waitingForPayement = false;
+        this.changeToGiveBack = 0;
     }
 
     public void addCash(int cashAdded){
@@ -40,8 +42,16 @@ public class VendingMachine {
     }
     
     public void addProduct(int productId, int productQuantity) {
-    	this.order.add(productId, productQuantity);
-    	this.amountToPay += this.products.get(productId).getPrice();
+    	if(this.products.get(productId).getQuantity()-productQuantity >= 0) {
+    		//add product to the order
+        	this.order.add(productId, productQuantity);
+        	//add price of products added
+        	this.amountToPay += this.products.get(productId).getPrice()*productQuantity;
+        	//takes products from the machine
+        	this.products.get(productId).buyProduct(productQuantity);
+    	} else {
+    		//throw notEnoughProductException
+    	}
     }
     
     public void orderComplete() {
@@ -62,11 +72,57 @@ public class VendingMachine {
     	}
     }
     
+    public void retrieveOrder() {
+    	this.order.clear();
+    	if(this.amountToPay<0) {
+    		this.changeToGiveBack = -1*this.amountToPay;
+    	}
+    	this.amountToPay = 0;
+    }
+    
+    public void giveBackChange() {
+    	this.changeToGiveBack = 0;
+    }
+    
+    public void cancelOrder() {
+    	this.order.clear();
+    	this.amountToPay = 0;
+    	//puts the products back in the machine's list
+    	for(Integer productQuantity: this.order) {
+    		int productId = this.order.indexOf(productQuantity);
+    		Product product = this.products.get(productId);
+    		product.putBackProduct(productQuantity.intValue());
+    	}
+    }
+    
     private void initStates() {
     	this.fullState = new FullState(this);
     	this.hasChangeState = new HasChangeState(this);
     	this.noChangeState = new NoChangeState(this);
     	this.soldOutState = new SoldOutState(this);
     }
-
+    
+    public State getFullState() {
+    	return this.fullState;
+    }
+    
+    public State getHasChangeState() {
+    	return this.hasChangeState;
+    }
+    
+    public State getNoChangeState() {
+    	return this.noChangeState;
+    }
+    
+    public State getSoldOutState() {
+    	return this.soldOutState;
+    }
+    
+    public void changeState(State newState) {
+    	this.machineState = newState;
+    }
+    
+    public boolean hasChange() {
+    	return (this.cashRegister>15 && this.cashRegister%7==0);
+    }
 }

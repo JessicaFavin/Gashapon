@@ -6,4 +6,6 @@ public interface State {
     public void payOrder(double moneyInserted);
     public void retrieveOrder();
     public void cancelOrder();
+    public void callRestockTeam();
+    public void giveBackChange();
 }

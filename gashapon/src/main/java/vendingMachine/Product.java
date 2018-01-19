@@ -28,6 +28,12 @@ public class Product {
             this.quantity -= quantityBought;
         }
     }
+    
+    public void putBackProduct(int quantityPutBack) {
+    	if(quantityPutBack>0) {
+    		this.quantity = Math.max(this.quantity+quantityPutBack, Product.maxQuantity);
+    	}
+    }
 
     public boolean isEmpty(){
         return (this.quantity==0);
