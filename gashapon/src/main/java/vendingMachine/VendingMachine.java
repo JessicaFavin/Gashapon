@@ -17,10 +17,20 @@ public class VendingMachine {
     private State hasChangeState;
     private State noChangeState;
     private State soldOutState ;
+    
+    public VendingMachine() {
+    	initStates();
+    	this.products = new ArrayList<Product>();
+        this.cashRegister = 0;
+        this.machineState = noChangeState; 
+        this.amountToPay = 0;
+        this.order = new ArrayList<Integer>();
+        this.waitingForPayement = false;
+    }
 
     public VendingMachine(ArrayList<Product> products){
     	initStates();
-        this.products = products;
+    	initProducts(products);
         this.cashRegister = 0;
         this.machineState = noChangeState; 
         this.amountToPay = 0;
@@ -41,6 +51,9 @@ public class VendingMachine {
         }
     }
     
+    /*
+     * Customer
+     */
     public void addProduct(int productId, int productQuantity) {
     	if(this.products.get(productId).getQuantity()-productQuantity >= 0) {
     		//add product to the order
@@ -94,6 +107,26 @@ public class VendingMachine {
     		product.putBackProduct(productQuantity.intValue());
     	}
     }
+
+    /*
+    public void restockMachine(ArrayList<Product> products) {
+    	boolean filled = false;
+    	for(Product p: products) {
+    		filled = false;
+    		for(int i=0 ; i < this.products.size() ; i++) {
+    			if(p.isSame(this.products.get(i))) {
+    				this.products.get(i).restockProduct(p.getQuantity());
+    				filled = true;
+    				break;
+    			}
+    		}
+    		if(!filled) {
+    			this.products.add(p);
+    		}
+    	}
+    }
+    */
+
     
     private void initStates() {
     	this.fullState = new FullState(this);
@@ -125,4 +158,20 @@ public class VendingMachine {
     public boolean hasChange() {
     	return (this.cashRegister>15 && this.cashRegister%7==0);
     }
+    
+    private void initProducts(ArrayList<Product> products) {
+    	if(products.size() > VendingMachine.productsCapacity) {
+    		int i = 0;
+    		for(Product p : products) {
+    			if(i >= VendingMachine.productsCapacity)
+    				break;
+    			
+    			this.products.add(p);
+    			i++;
+    		}
+    	} else {
+    		this.products = products;
+    	}
+    }
+
 }
