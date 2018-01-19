@@ -18,6 +18,25 @@ public class Product {
         this.name = name;
 
     }
+    
+    public Product(double price, String img, String name, int quantity){
+        this.price = price;
+        this.quantity = quantity;
+        this.id = nextId;
+        incrementId();
+        this.img = img;
+        this.name = name;
+
+    }
+    
+    public void restockProduct(int n){
+    	int i = this.quantity + n;
+    	if(i < maxQuantity) {
+    		this.quantity = i;
+    	} else {
+    		this.quantity = maxQuantity;
+    	}
+    }
 
     public void restockProduct(){
     	this.quantity = maxQuantity;
@@ -55,6 +74,10 @@ public class Product {
 
     private void incrementId(){
         nextId++;
+    }
+    
+    public boolean isSame(Product p) {
+    	return (p.getId() == this.id);
     }
 
 
