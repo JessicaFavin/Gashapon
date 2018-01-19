@@ -1,31 +1,26 @@
-
+package vendingMachine;
 
 public class Product {
-    private static final int maxQuantity = 10;
+    public static final int maxQuantity = 10;
     private static int nextId = 1;
-    private int price;
+    private double price;
     private int quantity;
     private int id;
     private String img;
     private String name;
 
-    public Product(int price, String img, String name){
+    public Product(double price, String img, String name){
         this.price = price;
-        this.quantity = this.maxQuantity;
-        this.is = nextId;
+        this.quantity = Product.maxQuantity;
+        this.id = nextId;
         incrementId();
         this.img = img;
         this.name = name;
 
     }
 
-    public void restockProduct(int quantityAdded){
-        if(quantityAdded>0){
-            this.quantity += quantityAdded;
-            if(this.quantity>maxQuantity){
-                this.quantity = maxQuantity;
-            }
-        }
+    public void restockProduct(){
+    	this.quantity = maxQuantity;
     }
 
     public void buyProduct(int quantityBought){
@@ -34,11 +29,11 @@ public class Product {
         }
     }
 
-    public boolen isEmpty(){
+    public boolean isEmpty(){
         return (this.quantity==0);
     }
 
-    public int getPrice(){
+    public double getPrice(){
         return this.price;
     }
 
