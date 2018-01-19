@@ -1,6 +1,7 @@
 package vendingMachine;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VendingMachine {
     public ArrayList<Product> products; 
@@ -8,7 +9,7 @@ public class VendingMachine {
     private int cashRegister;
     private State machineState; 
     private int amountToPay;
-    private ArrayList<Integer> order;
+    private HashMap<Integer, Integer> order;
     private boolean waitingForPayement;
     private double changeToGiveBack;
 
@@ -24,7 +25,7 @@ public class VendingMachine {
         this.cashRegister = 0;
         this.machineState = noChangeState; 
         this.amountToPay = 0;
-        this.order = new ArrayList<Integer>();
+        this.order = new HashMap<Integer, Integer>();
         this.waitingForPayement = false;
     }
 
@@ -34,7 +35,7 @@ public class VendingMachine {
         this.cashRegister = 0;
         this.machineState = noChangeState; 
         this.amountToPay = 0;
-        this.order = new ArrayList<Integer>();
+        this.order = new HashMap<Integer, Integer>();
         this.waitingForPayement = false;
         this.changeToGiveBack = 0;
     }
@@ -57,7 +58,7 @@ public class VendingMachine {
     public void addProduct(int productId, int productQuantity) {
     	if(this.products.get(productId).getQuantity()-productQuantity >= 0) {
     		//add product to the order
-        	this.order.add(productId, productQuantity);
+        	this.order.put(productId, productQuantity);
         	//add price of products added
         	this.amountToPay += this.products.get(productId).getPrice()*productQuantity;
         	//takes products from the machine
@@ -101,11 +102,14 @@ public class VendingMachine {
     	this.order.clear();
     	this.amountToPay = 0;
     	//puts the products back in the machine's list
-    	for(Integer productQuantity: this.order) {
-    		int productId = this.order.indexOf(productQuantity);
-    		Product product = this.products.get(productId);
-    		product.putBackProduct(productQuantity.intValue());
-    	}
+    	for(int i=0; i<VendingMachine.productsCapacity; i++) {
+			Integer productQuantity = this.order.get(i);
+			int productId = i;
+			if(productQuantity != null) {
+				Product product = this.products.get(productId);
+	    		product.putBackProduct(productQuantity.intValue());
+			}
+		}
     }
 
     /*
@@ -172,6 +176,14 @@ public class VendingMachine {
     	} else {
     		this.products = products;
     	}
+    }
+    
+    public ArrayList<Product> getProducts(){
+    	return this.products;
+    }
+    
+    public HashMap<Integer, Integer> getOrder() {
+    	return this.order;
     }
 
 }
