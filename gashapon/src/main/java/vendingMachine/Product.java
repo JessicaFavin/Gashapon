@@ -85,6 +85,10 @@ public class Product {
     public boolean isSame(Product p) {
     	return (p.getId() == this.id);
     }
+    
+    public boolean isSame(int id) {
+    	return (id == this.id);
+    }
 
 
 }

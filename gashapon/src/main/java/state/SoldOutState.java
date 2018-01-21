@@ -1,4 +1,8 @@
-package vendingMachine;
+package state;
+
+import exception.RestockNotNeededException;
+import exception.SoldOutException;
+import vendingMachine.VendingMachine;
 
 public class SoldOutState implements State {
 
@@ -39,6 +43,12 @@ public class SoldOutState implements State {
 		this.vendingMachine.restockMachine();
 		//change to full state
 		this.vendingMachine.changeState(this.vendingMachine.getFullState());
+	}
+
+	@Override
+	public void giveBackChange() throws SoldOutException {
+		// TODO Auto-generated method stub
+		
 	}
 
 

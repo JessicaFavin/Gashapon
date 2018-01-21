@@ -1,14 +1,19 @@
-package vendingMachine;
+package state;
 
-public class HasChangeState implements State {
+import exception.RestockNotNeededException;
+import exception.SoldOutException;
+import vendingMachine.VendingMachine;
+
+public class NoChangeState implements State {
 
 	//the vending machine is the context 
 	private VendingMachine vendingMachine;
 	
-	public HasChangeState(VendingMachine vendingMachine) {
+	public NoChangeState(VendingMachine vendingMachine) {
 		this.vendingMachine = vendingMachine;
 	}
 
+	@Override
 	public void addProduct(int productId, int productQuantity) throws SoldOutException {
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//checks if ID exists in the vending machine list
@@ -19,6 +24,7 @@ public class HasChangeState implements State {
 		}
 	}
 
+	@Override
 	public void orderComplete() throws SoldOutException {
 		//checks if not in the paying phase
 		if(!this.vendingMachine.getWaitingForPayement()) {
@@ -26,7 +32,12 @@ public class HasChangeState implements State {
 		}		
 	}
 
+	@Override
 	public void payOrder(double moneyInserted) throws SoldOutException {
+		//TO DO
+		//has to make sure user has the exact right amount of money
+		
+		/*
 		//checks if not in the paying phase
 		if(this.vendingMachine.getWaitingForPayement()) {
 			//checks if inserted good money
@@ -34,14 +45,17 @@ public class HasChangeState implements State {
 				this.vendingMachine.insertMoney(moneyInserted);
 			}
 		}		
+		*/
+		
 	}
 
+	@Override
 	public void retrieveOrder() throws SoldOutException {
 		//checks if not in the paying phase
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//changes state to hasChange or noChange
-			if(!this.vendingMachine.hasChange()) {
-				this.vendingMachine.changeState(this.vendingMachine.getNoChangeState());
+			if(this.vendingMachine.hasChange()) {
+				this.vendingMachine.changeState(this.vendingMachine.getHasChangeState());
 			}
 			//checks if need to change state to soldOut
 			for(int i=0; i<VendingMachine.productsCapacity; i++) {
@@ -57,6 +71,7 @@ public class HasChangeState implements State {
 		
 	}
 
+	@Override
 	public void cancelOrder() throws SoldOutException {
 		//checks if not in the paying phase
 		if(!this.vendingMachine.getWaitingForPayement()) {
@@ -64,13 +79,16 @@ public class HasChangeState implements State {
 		}
 	}
 
+	@Override
 	public void callRestockTeam() throws RestockNotNeededException {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Override
 	public void giveBackChange() throws SoldOutException {
 		this.vendingMachine.giveBackChange();		
 	}
+
 	
 }

@@ -1,21 +1,30 @@
-package vendingMachine;
+package state;
+
+import vendingMachine.VendingMachine;
+import exception.NotEnoughProductException;
+import exception.RestockNotNeededException;
+import exception.SoldOutException;
 
 public class FullState implements State {
-	
+
 	//the vending machine is the context 
 	private VendingMachine vendingMachine;
-	
+
 	public FullState(VendingMachine vendingMachine) {
 		this.vendingMachine = vendingMachine;
 	}
-	
+
 	@Override
 	public void addProduct(int productId, int productQuantity) throws SoldOutException {
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//checks if ID exists in the vending machine list
-			if(this.vendingMachine.getProducts().get(productId) != null) {
-				//add the product to the order list
-				this.vendingMachine.addProduct(productId, productQuantity);
+			if(this.vendingMachine.getProduct(productId) != null) {
+				try {
+					//add the product to the order list
+					this.vendingMachine.addProduct(productId, productQuantity);
+				}catch(NotEnoughProductException e) {
+					//TODO do something
+				}
 			}
 		}
 	}
@@ -60,7 +69,7 @@ public class FullState implements State {
 			}
 			this.vendingMachine.retrieveOrder();
 		}
-		
+
 	}
 
 	@Override
@@ -74,7 +83,7 @@ public class FullState implements State {
 	@Override
 	public void callRestockTeam() throws RestockNotNeededException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
