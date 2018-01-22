@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import exception.SoldOutException;
+import exception.InitException;
 import exception.NotEnoughProductException;
 
 import state.FullState;
@@ -51,7 +52,9 @@ public class VendingMachine {
         
         try {
         	initProducts(products);
-        } catch(SoldOutException e) {
+        } catch(InitException e) {
+        	//should be handle by the controller, shouldn't it ?
+        } catch (SoldOutException e) {
         	changeState(soldOutState);
         }
     }
@@ -180,21 +183,24 @@ public class VendingMachine {
     	return (this.cashRegister>15 && this.cashRegister%7==0);
     }
     
-    private void initProducts(ArrayList<Product> products) throws SoldOutException {
-    	if(products.size() == 0) {
-    		throw new SoldOutException();
-    	}
-    	if(products.size() > VendingMachine.productsCapacity) {
+    private void initProducts(ArrayList<Product> products) throws InitException, SoldOutException {
+    	//if the list of products contains enough products to fill the machine
+    	if(products.size() >= VendingMachine.productsCapacity) {
     		int i = 0;
     		for(Product p : products) {
-    			if(i >= VendingMachine.productsCapacity)
+    			if(i >= VendingMachine.productsCapacity) {
     				break;
+    			}
     			
     			this.products.add(p);
+    			if(p.isEmpty()) {
+    				throw new SoldOutException();
+    			}
     			i++;
     		}
     	} else {
-    		this.products = products;
+    		//if not enough products throw init exception
+    		throw new InitException();
     	}
     }
     
@@ -214,6 +220,14 @@ public class VendingMachine {
     
     public HashMap<Integer, Integer> getOrder() {
     	return this.order;
+    }
+    
+    public double getChangeToGiveBack() {
+    	return this.changeToGiveBack;
+    }
+    
+    public State getMachineState() {
+    	return this.machineState;
     }
 
 }
