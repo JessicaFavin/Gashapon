@@ -5,6 +5,7 @@ package app;
 import java.net.URL;
 import java.util.ArrayList;
 
+import exception.InitException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -19,7 +20,7 @@ public class App extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			
-			final URL url = getClass().getResource("../vendingMachine/main.fxml");
+			final URL url = getClass().getResource("../../../gui/view/main.fxml");
 		    final FXMLLoader fxmlLoader = new FXMLLoader(url);
 		      
 	        final Pane root = (Pane) fxmlLoader.load();
@@ -49,7 +50,12 @@ public class App extends Application {
 		products.add(new Product(1 ,"water.png","Water"));
 		products.add(new Product(1.5,"sparkling_water.png","Sparkling water"));
 		//create vending machine
-		VendingMachine vendingMachine = new VendingMachine(products);
+		try{
+			VendingMachine vendingMachine = new VendingMachine(products);
+		} catch(InitException e) {
+			System.out.println("The products array does not contain enough products (9");
+		}
+		
 		//do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
 		System.out.println("do sazkjanrartupz,arâornow (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
 
