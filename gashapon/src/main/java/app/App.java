@@ -1,6 +1,7 @@
 package app;
 
-import java.util.ArrayList; 
+import java.util.ArrayList;
+
 import vendingMachine.VendingMachine;
 import vendingMachine.Product;
 
@@ -22,7 +23,7 @@ public class App {
 		VendingMachine vendingMachine = new VendingMachine(products);
 		//do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
 		System.out.println("do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
-
+		
 	}
 
 }
