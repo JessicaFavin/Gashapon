@@ -19,7 +19,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                               	<image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
@@ -51,7 +51,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                               	<image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -86,7 +86,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -125,7 +125,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                 <image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
@@ -157,7 +157,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                	<image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -192,7 +192,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>                              
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -231,7 +231,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>                              </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
@@ -262,7 +262,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -297,7 +297,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg" />
+                              		<Image url="@/gashapon/src/ressources/img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />

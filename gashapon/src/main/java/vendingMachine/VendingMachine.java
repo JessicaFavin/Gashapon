@@ -23,11 +23,10 @@ public class VendingMachine {
     private double changeToGiveBack;
 
     //list of all the states
-    private State fullState; // all the products are available
+    private State fullState; // all the products are available / priority
     private State hasChangeState; // the machine has money
     private State noChangeState; // the machine does not have money
-    private State soldOutState ; // at least one product can not be sold
-    // TODO: see for priority between noChange/soldOut, hasChange/soldOut, noChange/full, hasChange/full
+    private State soldOutState ; // at least one product can not be sold / priority
     
     public VendingMachine() throws SoldOutException {
     	initStates();
