@@ -1,12 +1,42 @@
 package app;
 
-import java.util.ArrayList; 
+
+
+import java.net.URL;
+import java.util.ArrayList;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import vendingMachine.VendingMachine;
 import vendingMachine.Product;
 
-public class App {
+public class App extends Application {
+	
+	@Override
+	public void start(Stage primaryStage) {
+		try {
+			
+			final URL url = getClass().getResource("../vendingMachine/main.fxml");
+		    final FXMLLoader fxmlLoader = new FXMLLoader(url);
+		      
+	        final Pane root = (Pane) fxmlLoader.load();
+
+	        final Scene scene = new Scene(root, 350, 300);
+	        primaryStage.setTitle("Gashapon"); 
+	        primaryStage.setScene(scene);        
+	        primaryStage.show();
+	        
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static void main(String[] args) {
+		
+		launch(args);
 		// create products
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -21,7 +51,7 @@ public class App {
 		//create vending machine
 		VendingMachine vendingMachine = new VendingMachine(products);
 		//do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-		System.out.println("do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
+		System.out.println("do sazkjanrartupz,arâornow (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
 
 	}
 
