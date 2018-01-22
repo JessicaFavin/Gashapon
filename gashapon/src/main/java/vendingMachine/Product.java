@@ -31,15 +31,15 @@ public class Product {
     
     public void restockProduct(int n){
     	int i = this.quantity + n;
-    	if(i < maxQuantity) {
+    	if(i < Product.maxQuantity) {
     		this.quantity = i;
     	} else {
-    		this.quantity = maxQuantity;
+    		this.quantity = Product.maxQuantity;
     	}
     }
 
     public void restockProduct(){
-    	this.quantity = maxQuantity;
+    	this.quantity = Product.maxQuantity;
     }
 
     public void buyProduct(int quantityBought){
@@ -56,6 +56,10 @@ public class Product {
 
     public boolean isEmpty(){
         return (this.quantity==0);
+    }
+    
+    public boolean isFull() {
+    	return (this.quantity==Product.maxQuantity);
     }
 
     public double getPrice(){

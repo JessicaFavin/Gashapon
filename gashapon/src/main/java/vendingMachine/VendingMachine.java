@@ -41,10 +41,11 @@ public class VendingMachine {
         changeState(soldOutState);
     }
 
-    public VendingMachine(ArrayList<Product> products){
+    public VendingMachine(ArrayList<Product> products) throws InitException {
     	initStates();
         this.cashRegister = 0;
-        this.machineState = noChangeState; 
+        //if state is not full, it will be changed inside initProducts method 
+        this.machineState = fullState; 
         this.amountToPay = 0;
         this.order = new HashMap<Integer, Integer>();
         this.waitingForPayement = false;
@@ -54,8 +55,7 @@ public class VendingMachine {
         	initProducts(products);
         } catch(InitException e) {
         	//should be handle by the controller, shouldn't it ?
-        } catch (SoldOutException e) {
-        	changeState(soldOutState);
+        	throw new InitException();
         }
     }
 
@@ -183,7 +183,7 @@ public class VendingMachine {
     	return (this.cashRegister>15 && this.cashRegister%7==0);
     }
     
-    private void initProducts(ArrayList<Product> products) throws InitException, SoldOutException {
+    private void initProducts(ArrayList<Product> products) throws InitException {
     	//if the list of products contains enough products to fill the machine
     	if(products.size() >= VendingMachine.productsCapacity) {
     		int i = 0;
@@ -194,8 +194,11 @@ public class VendingMachine {
     			
     			this.products.add(p);
     			if(p.isEmpty()) {
-    				throw new SoldOutException();
+    				this.changeState(this.soldOutState);
+    			} else if(!p.isFull()) {
+    				this.changeState(this.noChangeState);
     			}
+    			
     			i++;
     		}
     	} else {
