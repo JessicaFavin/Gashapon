@@ -1,5 +1,6 @@
 package app;
 
+<<<<<<< HEAD
 
 
 import java.net.URL;
@@ -11,6 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+=======
+import java.util.ArrayList;
+
+>>>>>>> perso_celande
 import vendingMachine.VendingMachine;
 import vendingMachine.Product;
 
@@ -57,8 +62,7 @@ public class App extends Application {
 		}
 		
 		//do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
-		System.out.println("do sazkjanrartupz,arâornow (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
-
+		System.out.println("do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
 	}
 
 }
