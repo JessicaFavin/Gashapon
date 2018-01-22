@@ -1,4 +1,6 @@
-package vendingMachine;
+package exception;
+
+import java.lang.Exception;
 
 public class RestockNotNeededException extends Exception {
 

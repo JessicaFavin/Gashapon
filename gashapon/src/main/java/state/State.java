@@ -1,4 +1,7 @@
-package vendingMachine;
+package state;
+
+import exception.RestockNotNeededException;
+import exception.SoldOutException;
 
 public interface State {
     public void addProduct(int productId, int productQuantity) throws SoldOutException;

@@ -3,6 +3,15 @@ package vendingMachine;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import exception.SoldOutException;
+import exception.NotEnoughProductException;
+
+import state.FullState;
+import state.HasChangeState;
+import state.NoChangeState;
+import state.SoldOutState;
+import state.State;
+
 public class VendingMachine {
     public ArrayList<Product> products; 
     public static final int productsCapacity = 9;
@@ -14,12 +23,13 @@ public class VendingMachine {
     private double changeToGiveBack;
 
     //list of all the states
-    private State fullState;
-    private State hasChangeState;
-    private State noChangeState;
-    private State soldOutState ;
+    private State fullState; // all the products are available
+    private State hasChangeState; // the machine has money
+    private State noChangeState; // the machine does not have money
+    private State soldOutState ; // at least one product can not be sold
+    // TODO: see for priority between noChange/soldOut, hasChange/soldOut, noChange/full, hasChange/full
     
-    public VendingMachine() {
+    public VendingMachine() throws SoldOutException {
     	initStates();
     	this.products = new ArrayList<Product>();
         this.cashRegister = 0;
@@ -27,17 +37,24 @@ public class VendingMachine {
         this.amountToPay = 0;
         this.order = new HashMap<Integer, Integer>();
         this.waitingForPayement = false;
+        
+        changeState(soldOutState);
     }
 
     public VendingMachine(ArrayList<Product> products){
     	initStates();
-    	initProducts(products);
         this.cashRegister = 0;
         this.machineState = noChangeState; 
         this.amountToPay = 0;
         this.order = new HashMap<Integer, Integer>();
         this.waitingForPayement = false;
         this.changeToGiveBack = 0;
+        
+        try {
+        	initProducts(products);
+        } catch(SoldOutException e) {
+        	changeState(soldOutState);
+        }
     }
 
     public void addCash(int cashAdded){
@@ -53,18 +70,19 @@ public class VendingMachine {
     }
     
     /*
-     * Customer
+     * Customer add product to order list
      */
-    public void addProduct(int productId, int productQuantity) {
-    	if(this.products.get(productId).getQuantity()-productQuantity >= 0) {
+    public void addProduct(int productId, int productQuantity) throws NotEnoughProductException {
+    	Product productToAdd = this.getProduct(productId);
+    	if(productToAdd.getQuantity()-productQuantity >= 0) {
     		//add product to the order
         	this.order.put(productId, productQuantity);
         	//add price of products added
-        	this.amountToPay += this.products.get(productId).getPrice()*productQuantity;
+        	this.amountToPay += productToAdd.getPrice()*productQuantity;
         	//takes products from the machine
-        	this.products.get(productId).buyProduct(productQuantity);
+        	productToAdd.buyProduct(productQuantity);
     	} else {
-    		//throw notEnoughProductException
+    		throw new NotEnoughProductException();
     	}
     }
     
@@ -163,7 +181,10 @@ public class VendingMachine {
     	return (this.cashRegister>15 && this.cashRegister%7==0);
     }
     
-    private void initProducts(ArrayList<Product> products) {
+    private void initProducts(ArrayList<Product> products) throws SoldOutException {
+    	if(products.size() == 0) {
+    		throw new SoldOutException();
+    	}
     	if(products.size() > VendingMachine.productsCapacity) {
     		int i = 0;
     		for(Product p : products) {
@@ -180,6 +201,16 @@ public class VendingMachine {
     
     public ArrayList<Product> getProducts(){
     	return this.products;
+    }
+    
+    public Product getProduct(int id) {
+    	for(Product product : this.products) {
+    		if(product.isSame(id)) {
+    			return product;
+    		}
+    	}
+    	
+    	return null;
     }
     
     public HashMap<Integer, Integer> getOrder() {
