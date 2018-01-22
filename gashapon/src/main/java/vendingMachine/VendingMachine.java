@@ -199,7 +199,7 @@ public class VendingMachine {
     			i++;
     		}
     	} else {
-    		//if not enough products throw init exception
+    		//if there's not enough products throw init exception
     		throw new InitException();
     	}
     }

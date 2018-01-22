@@ -1,5 +1,6 @@
 package state;
 
+import exception.NotEnoughProductException;
 import exception.RestockNotNeededException;
 import exception.SoldOutException;
 import vendingMachine.VendingMachine;
@@ -13,31 +14,37 @@ public class SoldOutState implements State {
 		this.vendingMachine = vendingMachine;
 	}
 
-	public void addProduct(int productId, int productQuantity) throws SoldOutException {
+	@Override
+	public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException {
 		throw new SoldOutException();
 		
 	}
 
+	@Override
 	public void orderComplete() throws SoldOutException {
 		throw new SoldOutException();
 		
 	}
 
+	@Override
 	public void payOrder(double moneyInserted) throws SoldOutException {
 		throw new SoldOutException();
 		
 	}
 
+	@Override
 	public void retrieveOrder() throws SoldOutException {
 		throw new SoldOutException();
 		
 	}
 
+	@Override
 	public void cancelOrder() throws SoldOutException {
 		throw new SoldOutException();
 		
 	}
 	
+	@Override
 	public void callRestockTeam() throws RestockNotNeededException{
 		//call the restock team
 		this.vendingMachine.restockMachine();
@@ -47,7 +54,7 @@ public class SoldOutState implements State {
 
 	@Override
 	public void giveBackChange() throws SoldOutException {
-		// TODO Auto-generated method stub
+		throw new SoldOutException();
 		
 	}
 

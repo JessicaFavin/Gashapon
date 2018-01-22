@@ -1,10 +1,11 @@
 package state;
 
+import exception.NotEnoughProductException;
 import exception.RestockNotNeededException;
 import exception.SoldOutException;
 
 public interface State {
-    public void addProduct(int productId, int productQuantity) throws SoldOutException;
+    public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException;
     public void orderComplete() throws SoldOutException;
     public void payOrder(double moneyInserted) throws SoldOutException;
     public void retrieveOrder() throws SoldOutException;

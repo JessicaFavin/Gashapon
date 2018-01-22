@@ -15,15 +15,15 @@ public class FullState implements State {
 	}
 
 	@Override
-	public void addProduct(int productId, int productQuantity) throws SoldOutException {
+	public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException {
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//checks if ID exists in the vending machine list
 			if(this.vendingMachine.getProduct(productId) != null) {
 				try {
-					//add the product to the order list
 					this.vendingMachine.addProduct(productId, productQuantity);
-				}catch(NotEnoughProductException e) {
-					//TODO do something
+				} catch (NotEnoughProductException e) {
+					//throws exception to be handled by the controller
+					throw new NotEnoughProductException();
 				}
 			}
 		}
