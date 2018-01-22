@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.control.*?>
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -20,27 +17,27 @@
                      <children>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" >
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                               	<image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="31" wrapText="true">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          11" wrapText="true">
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €" wrapText="true">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €" wrapText="true">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                     </TextArea>
                                  </children>
@@ -54,7 +51,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                               	<image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -62,20 +59,20 @@
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="21">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          21">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €" wrapText="true">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €" wrapText="true">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                     </TextArea>
                                  </children>
@@ -89,7 +86,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -97,20 +94,20 @@
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="11">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          31">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                     </TextArea>
                                  </children>
@@ -126,24 +123,24 @@
                      <children>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" >
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                 <image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="32" wrapText="true">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          12" wrapText="true">
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €" wrapText="true">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €" wrapText="true">
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="5.0" />
@@ -160,7 +157,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                	<image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -168,20 +165,20 @@
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="22">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          22">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                     </TextArea>
                                  </children>
@@ -195,7 +192,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>                              
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -203,20 +200,20 @@
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="12">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          32">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                     </TextArea>
                                  </children>
@@ -232,23 +229,23 @@
                      <children>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" >
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>                              </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="33" wrapText="true">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          13" wrapText="true">
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €" wrapText="true">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €" wrapText="true">
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="5.0" />
@@ -265,7 +262,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -273,20 +270,20 @@
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="23">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          23">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                     </TextArea>
                                  </children>
@@ -300,7 +297,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
-                              		<Image url="img/mms.jpg"></Image>
+                              		<Image url="img/mms.jpg" />
                               	</image>
                                  <VBox.margin>
                                     <Insets top="5.0" />
@@ -308,20 +305,20 @@
                               </ImageView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="13">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="          33">
                                        <HBox.margin>
                                           <Insets right="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font size="20.0" />
                                        </font>
                                     </TextArea>
-                                    <TextArea prefHeight="200.0" prefWidth="200.0" text=" 0.80 €">
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" text="        0.80 €">
                                        <HBox.margin>
                                           <Insets left="5.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="24.0" />
+                                          <Font size="19.0" />
                                        </font>
                                     </TextArea>
                                  </children>
@@ -399,12 +396,12 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="V" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="V" HBox.hgrow="ALWAYS">
+                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -462,9 +459,9 @@
                               </Button>
                            </children>
                         </HBox>
-                        <TextField promptText="Change">
+                        <TextField prefHeight="25.0" prefWidth="200.0" promptText="Change">
                            <VBox.margin>
-                              <Insets left="70.0" right="20.0" top="25.0" />
+                              <Insets left="45.0" right="45.0" top="25.0" />
                            </VBox.margin>
                         </TextField>
                         <Pane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
