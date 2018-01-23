@@ -20,7 +20,7 @@ public class App extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			
-			final URL url = getClass().getResource("../gui/main.fxml");
+			final URL url = getClass().getResource("../gui/Main.fxml");
 		    final FXMLLoader fxmlLoader = new FXMLLoader(url);
 		      
 	        final Pane root = (Pane) fxmlLoader.load();
@@ -37,7 +37,7 @@ public class App extends Application {
 
 	public static void main(String[] args) {
 		
-		launch(args);
+		
 		// create products
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -58,6 +58,7 @@ public class App extends Application {
 		
 		//do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧
 		System.out.println("do stuff now (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧");
+		launch(args);
 	}
 
 }

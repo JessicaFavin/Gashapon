@@ -37,7 +37,7 @@ public class VendingMachine {
         this.amountToPay = 0;
         this.order = new HashMap<Integer, Integer>();
         this.waitingForPayement = false;
-        
+        this.products = new ArrayList<Product>();
         changeState(soldOutState);
     }
 
@@ -50,7 +50,7 @@ public class VendingMachine {
         this.order = new HashMap<Integer, Integer>();
         this.waitingForPayement = false;
         this.changeToGiveBack = 0;
-        
+        this.products = new ArrayList<Product>();
         try {
         	initProducts(products);
         } catch(InitException e) {
@@ -191,7 +191,6 @@ public class VendingMachine {
     			if(i >= VendingMachine.productsCapacity) {
     				break;
     			}
-    			
     			this.products.add(p);
     			if(p.isEmpty()) {
     				this.changeState(this.soldOutState);
