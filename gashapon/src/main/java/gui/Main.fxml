@@ -23,9 +23,9 @@
                      <children>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_1" fx:id="img_1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                               	<image>
-                              		<Image url="@../../../ressources/img/coke.png" />
+                              		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>
                               </ImageView>
                               <HBox alignment="CENTER" maxHeight="35.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
@@ -55,7 +55,7 @@
                         </VBox>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_4" fx:id="img_4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                               	<image>
                               		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>
@@ -87,7 +87,7 @@
                         </VBox>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_7" fx:id="img_7" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
                               		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>
@@ -123,7 +123,7 @@
                      <children>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_2" fx:id="img_2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                 <image>
                               		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>
@@ -152,7 +152,7 @@
                         </VBox>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_5" fx:id="img_5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                	<image>
                               		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>
@@ -184,7 +184,7 @@
                         </VBox>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_7" fx:id="img_8" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
                               		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>                              
@@ -194,7 +194,7 @@
                               </ImageView>
                               <HBox alignment="CENTER" maxHeight="35.0" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label id="id_8" fx:id="id_8" alignment="CENTER" text="11" HBox.hgrow="ALWAYS">
+                                    <Label id="id_7" fx:id="id_7" alignment="CENTER" text="11" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -202,7 +202,7 @@
                                           <Insets right="15.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label id="price_8" fx:id="price_8" alignment="CENTER" text="0.50 €" HBox.hgrow="ALWAYS">
+                                    <Label id="price_7" fx:id="price_7" alignment="CENTER" text="0.50 €" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -220,7 +220,7 @@
                      <children>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_3" fx:id="img_3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
                               		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>                              
@@ -249,7 +249,7 @@
                         </VBox>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_6" fx:id="img_6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
                               		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>
@@ -281,7 +281,7 @@
                         </VBox>
                         <VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <ImageView id="img_9" fx:id="img_9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                              <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                                  <image>
                               		<Image url="@./../ressources/img/mms.jpg" />
                               	</image>
@@ -315,43 +315,24 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="674.0" prefWidth="256.0">
                      <children>
-                        <TextField>
+                        <TextField id="order_field" fx:id="order_field">
                            <VBox.margin>
                               <Insets bottom="30.0" left="20.0" right="20.0" top="75.0" />
                            </VBox.margin>
                         </TextField>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="1" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Button id="button_1" fx:id="button_1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="1" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="2" HBox.hgrow="ALWAYS">
+                              <Button id="button_2" fx:id="button_2" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="2" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" text="3" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
-                           <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="4" textAlignment="CENTER" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="5" HBox.hgrow="ALWAYS">
-                                 <HBox.margin>
-                                    <Insets left="5.0" right="5.0" top="5.0" />
-                                 </HBox.margin>
-                              </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" text="6" HBox.hgrow="ALWAYS">
+                              <Button id="button_3" fx:id="button_3" alignment="CENTER" mnemonicParsing="false" text="3" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -360,17 +341,17 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="7" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Button id="button_4" fx:id="button_4" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="4" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="8" HBox.hgrow="ALWAYS">
+                              <Button id="button_5" fx:id="button_5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="5" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" text="9" HBox.hgrow="ALWAYS">
+                              <Button id="button_6" fx:id="button_6" alignment="CENTER" mnemonicParsing="false" text="6" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -379,17 +360,36 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="V" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Button id="button_7" fx:id="button_7" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="7" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" HBox.hgrow="ALWAYS">
+                              <Button id="button_8" fx:id="button_8" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="8" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" text="C" HBox.hgrow="ALWAYS">
+                              <Button id="button_9" fx:id="button_9" alignment="CENTER" mnemonicParsing="false" text="9" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
+                           <children>
+                              <Button id="button_v" fx:id="button_v" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="V" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button id="button_p" fx:id="button_p" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="+" HBox.hgrow="ALWAYS">
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button id="button_c" fx:id="button_c" alignment="CENTER" mnemonicParsing="false" text="C" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -403,17 +403,17 @@
                         </Label>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="50 c" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Button id="coin_0_50" fx:id="coin_0_50" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="0.50 €" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="1 €" HBox.hgrow="ALWAYS">
+                              <Button id="coin_1" fx:id="coin_1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="1 €" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="2€" HBox.hgrow="ALWAYS">
+                              <Button id="coin_2" fx:id="coin_2" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="2€" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
@@ -425,17 +425,17 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
                            <children>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="5 €" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                              <Button id="coin_5" fx:id="coin_5" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="5 €" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="10 €" HBox.hgrow="ALWAYS">
+                              <Button id="coin_10" fx:id="coin_10" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="10 €" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="20 €" HBox.hgrow="ALWAYS">
+                              <Button id="coin_20" fx:id="coin_20" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="40.0" text="20 €" HBox.hgrow="ALWAYS">
                                  <HBox.margin>
                                     <Insets left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>

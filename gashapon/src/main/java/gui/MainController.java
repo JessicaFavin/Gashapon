@@ -6,9 +6,13 @@ import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import exception.InitException;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import vendingMachine.Product;
@@ -49,6 +53,31 @@ public class MainController implements Initializable {
 	@FXML private ImageView img_8;
 	@FXML private ImageView img_9;
 	
+	// Text area where you see what was written
+	@FXML private TextArea order_field;
+	
+	// Order buttons
+	@FXML private Button button_1;
+	@FXML private Button button_2;
+	@FXML private Button button_3;
+	@FXML private Button button_4;
+	@FXML private Button button_5;
+	@FXML private Button button_6;
+	@FXML private Button button_7;
+	@FXML private Button button_8;
+	@FXML private Button button_9;
+	@FXML private Button button_v;
+	@FXML private Button button_p;
+	@FXML private Button button_c;
+	
+	// Coins and bills
+	@FXML private Button coin_0_50;
+	@FXML private Button coin_1;
+	@FXML private Button coin_2;
+	@FXML private Button coin_5;
+	@FXML private Button coin_10;
+	@FXML private Button coin_20;
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -73,6 +102,7 @@ public class MainController implements Initializable {
 		}
 		
 		initView(products);
+		initOrderButtonAction();
 		
 	}
 	
@@ -144,5 +174,13 @@ public class MainController implements Initializable {
 			id_9.setText("" + product.getId());
 			//img_9.setImage(new Image(path + product.getImg()));
 		}
+	}
+	
+	private void initOrderButtonAction() {
+		button_1.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		        order_field.setText(order_field.getText() + "1");
+		    }
+		});
 	}
 }
