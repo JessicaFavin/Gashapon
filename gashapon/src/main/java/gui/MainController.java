@@ -16,6 +16,7 @@ import vendingMachine.VendingMachine;
 
 public class MainController implements Initializable {
 
+	// Products id
 	@FXML private Label id_1;
 	@FXML private Label id_2;
 	@FXML private Label id_3;
@@ -26,6 +27,7 @@ public class MainController implements Initializable {
 	@FXML private Label id_8;
 	@FXML private Label id_9;
 	
+	// Products price
 	@FXML private Label price_1;
 	@FXML private Label price_2;
 	@FXML private Label price_3;
@@ -36,6 +38,7 @@ public class MainController implements Initializable {
 	@FXML private Label price_8;
 	@FXML private Label price_9;
 	
+	// Products image
 	@FXML private ImageView img_1;
 	@FXML private ImageView img_2;
 	@FXML private ImageView img_3;
@@ -83,63 +86,63 @@ public class MainController implements Initializable {
 			product = itr.next();
 			price_1.setText(product.getPrice() + " €");
 			id_1.setText("" + product.getId());
-			img_1.setImage(new Image(path + product.getImg()));
+			//img_1.setImage(new Image(path + product.getImg()));
 		}
 		
 		if (itr.hasNext()) {
 			product = itr.next();
 			price_2.setText(product.getPrice() + " €");
 			id_2.setText("" + product.getId());
-			img_2.setImage(new Image(path + product.getImg()));
+			//img_2.setImage(new Image(path + product.getImg()));
 		}
 		
 		if (itr.hasNext()) {
 			product = itr.next();
 			price_3.setText(product.getPrice() + " €");
 			id_3.setText("" + product.getId());
-			img_3.setImage(new Image(path + product.getImg()));
+			//img_3.setImage(new Image(path + product.getImg()));
 		}
 		
 		if (itr.hasNext()) {
 			product = itr.next();
 			price_4.setText(product.getPrice() + " €");
 			id_4.setText("" + product.getId());
-			img_4.setImage(new Image(path + product.getImg()));
+			//img_4.setImage(new Image(path + product.getImg()));
 		}
 		
 		if (itr.hasNext()) {
 			product = itr.next();
 			price_5.setText(product.getPrice() + " €");
 			id_5.setText("" + product.getId());
-			img_5.setImage(new Image(path + product.getImg()));
+			//img_5.setImage(new Image(path + product.getImg()));
 		}
 		
 		if (itr.hasNext()) {
 			product = itr.next();
 			price_6.setText(product.getPrice() + " €");
 			id_6.setText("" + product.getId());
-			img_6.setImage(new Image(path + product.getImg()));
+			//img_6.setImage(new Image(path + product.getImg()));
 		}
 		
 		if (itr.hasNext()) {
 			product = itr.next();
 			price_7.setText(product.getPrice() + " €");
 			id_7.setText("" + product.getId());
-			img_7.setImage(new Image(path + product.getImg()));
+			//img_7.setImage(new Image(path + product.getImg()));
 		}
 		
 		if (itr.hasNext()) {
 			product = itr.next();
 			price_8.setText(product.getPrice() + " €");
 			id_8.setText("" + product.getId());
-			img_8.setImage(new Image(path + product.getImg()));
+			//img_8.setImage(new Image(path + product.getImg()));
 		}
 
 		if (itr.hasNext()) {
 			product = itr.next();
 			price_9.setText(product.getPrice() + " €");
 			id_9.setText("" + product.getId());
-			img_9.setImage(new Image(path + product.getImg()));
+			//img_9.setImage(new Image(path + product.getImg()));
 		}
 	}
 }
