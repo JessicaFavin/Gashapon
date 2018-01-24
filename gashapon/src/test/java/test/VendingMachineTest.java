@@ -6,12 +6,18 @@ import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
+import exception.InitException;
 import vendingMachine.Product;
 import vendingMachine.VendingMachine;
 
 class VendingMachineTest {
+	
+	@Rule
+    public ExpectedException thrown = ExpectedException.none();
 
 	@Test
 	void test() {
@@ -44,10 +50,15 @@ class VendingMachineTest {
 
 	@Test
 	public void testFillMachineWithNoProducts() {
-		// Arrange
+		// Arrange		
 		ArrayList<Product> products = new ArrayList<Product>();
 		// Act
-		this.machine = new VendingMachine(products);
+		try {
+			this.machine = new VendingMachine(products);
+		} catch (InitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// Assert
 	}
 
@@ -65,7 +76,12 @@ class VendingMachineTest {
 		products.add(new Product(2.5 ,"water.png","Water"));
 		products.add(new Product(3,"sparkling_water.png","Sparkling water"));
 		// Act
-		this.machine = new VendingMachine(products);
+		try {
+			this.machine = new VendingMachine(products);
+		} catch (InitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Assert
 	}
@@ -91,7 +107,12 @@ class VendingMachineTest {
 		products.add(new Product(2.5 ,"water.png","Water"));
 		products.add(new Product(3,"sparkling_water.png","Sparkling water"));
 		// Act
-		this.machine = new VendingMachine(products);
+		try {
+			this.machine = new VendingMachine(products);
+		} catch (InitException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		// Assert
 	}
