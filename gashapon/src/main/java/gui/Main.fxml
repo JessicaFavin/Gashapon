@@ -194,7 +194,7 @@
                               </ImageView>
                               <HBox alignment="CENTER" maxHeight="35.0" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Label id="id_7" fx:id="id_7" alignment="CENTER" text="11" HBox.hgrow="ALWAYS">
+                                    <Label id="id_8" fx:id="id_8" alignment="CENTER" text="11" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -202,7 +202,7 @@
                                           <Insets right="15.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <Label id="price_7" fx:id="price_7" alignment="CENTER" text="0.50 €" HBox.hgrow="ALWAYS">
+                                    <Label id="price_8" fx:id="price_8" alignment="CENTER" text="0.50 €" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -442,7 +442,7 @@
                               </Button>
                            </children>
                         </HBox>
-                        <TextField prefHeight="25.0" prefWidth="200.0" promptText="Change">
+                        <TextField id="change_field" fx:id="change_field" prefHeight="25.0" prefWidth="200.0" promptText="Change">
                            <VBox.margin>
                               <Insets left="45.0" right="45.0" top="25.0" />
                            </VBox.margin>

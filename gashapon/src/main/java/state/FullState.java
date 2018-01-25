@@ -2,6 +2,7 @@ package state;
 
 import vendingMachine.VendingMachine;
 import exception.NotEnoughProductException;
+import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
 import exception.SoldOutException;
 
@@ -24,6 +25,9 @@ public class FullState implements State {
 				} catch (NotEnoughProductException e) {
 					//throws exception to be handled by the controller
 					throw new NotEnoughProductException();
+				} catch (ProductDoesNotExistException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		}

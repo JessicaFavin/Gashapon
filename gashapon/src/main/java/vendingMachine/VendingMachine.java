@@ -6,7 +6,7 @@ import java.util.HashMap;
 import exception.SoldOutException;
 import exception.InitException;
 import exception.NotEnoughProductException;
-
+import exception.ProductDoesNotExistException;
 import state.FullState;
 import state.HasChangeState;
 import state.NoChangeState;
@@ -16,7 +16,7 @@ import state.State;
 public class VendingMachine {
     public ArrayList<Product> products; 
     public static final int productsCapacity = 9;
-    private int cashRegister;
+    private double cashRegister;
     private State machineState; 
     private int amountToPay;
     private HashMap<Integer, Integer> order;
@@ -59,13 +59,13 @@ public class VendingMachine {
         }
     }
 
-    public void addCash(int cashAdded){
+    public void addCash(double cashAdded){
         if(cashAdded>0){
             this.cashRegister += cashAdded;
         }
     }
 
-    public void giveCash(int cashReturned){
+    public void giveCash(double cashReturned){
         if (cashReturned<=cashRegister){
             this.cashRegister -= cashReturned;
         }
@@ -74,8 +74,10 @@ public class VendingMachine {
     /*
      * Customer add product to order list
      */
-    public void addProduct(int productId, int productQuantity) throws NotEnoughProductException {
+    public void addProduct(int productId, int productQuantity) throws NotEnoughProductException, ProductDoesNotExistException {
     	Product productToAdd = this.getProduct(productId);
+    	if(productToAdd == null)
+    		throw new ProductDoesNotExistException();
     	if(productToAdd.getQuantity()-productQuantity >= 0) {
     		//add product to the order
         	this.order.put(productId, productQuantity);
@@ -86,6 +88,14 @@ public class VendingMachine {
     	} else {
     		throw new NotEnoughProductException();
     	}
+    }
+    
+    public void statePayOrder(double moneyInserted) throws SoldOutException {
+    	this.machineState.payOrder(moneyInserted);
+    }
+    
+    public void stateAddProduct(int productId, int productQuantity) throws NotEnoughProductException, SoldOutException, ProductDoesNotExistException {
+    	machineState.addProduct(productId, productQuantity);
     }
     
     public void orderComplete() {
@@ -104,6 +114,10 @@ public class VendingMachine {
     	for(Product product: this.products) {
     		product.restockProduct();
     	}
+    }
+    
+    public void stateRetriveOrder() throws SoldOutException {
+    	machineState.retrieveOrder();
     }
     
     public void retrieveOrder() {
@@ -130,6 +144,10 @@ public class VendingMachine {
 	    		product.putBackProduct(productQuantity.intValue());
 			}
 		}
+    }
+    
+    public void stateCancelOrder() throws SoldOutException {
+    	this.machineState.cancelOrder();
     }
 
     /*
@@ -230,6 +248,10 @@ public class VendingMachine {
     
     public State getMachineState() {
     	return this.machineState;
+    }
+    
+    public double getPrice(int productId) {
+    	return getProduct(productId).getPrice();
     }
 
 }

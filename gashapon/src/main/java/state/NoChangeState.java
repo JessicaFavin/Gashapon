@@ -1,6 +1,7 @@
 package state;
 
 import exception.NotEnoughProductException;
+import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
 import exception.SoldOutException;
 import vendingMachine.VendingMachine;
@@ -15,7 +16,7 @@ public class NoChangeState implements State {
 	}
 
 	@Override
-	public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException {
+	public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException, ProductDoesNotExistException {
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//checks if ID exists in the vending machine list
 			if(this.vendingMachine.getProducts().get(productId) != null) {

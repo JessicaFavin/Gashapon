@@ -1,6 +1,7 @@
 package state;
 
 import exception.NotEnoughProductException;
+import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
 import exception.SoldOutException;
 import vendingMachine.VendingMachine;
@@ -14,16 +15,21 @@ public class HasChangeState implements State {
 		this.vendingMachine = vendingMachine;
 	}
 
-	public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException {
+	public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException, ProductDoesNotExistException {
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//checks if ID exists in the vending machine list
-			if(this.vendingMachine.getProducts().get(productId) != null) {
-				try {
-					this.vendingMachine.addProduct(productId, productQuantity);
-				} catch (NotEnoughProductException e) {
-					//throws exception to be handled by the controller
-					throw new NotEnoughProductException();
+			try {
+				if(this.vendingMachine.getProducts().get(productId) != null) {
+					try {
+						this.vendingMachine.addProduct(productId, productQuantity);
+					} catch (NotEnoughProductException e) {
+						//throws exception to be handled by the controller
+						throw new NotEnoughProductException();
+					}
 				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
