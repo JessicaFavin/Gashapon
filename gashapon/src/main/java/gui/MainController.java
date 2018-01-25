@@ -259,6 +259,7 @@ public class MainController implements Initializable {
 					checkPayment();
 				} catch(NotEnoughProductException ne) {
 					System.err.println("Button V Action - The product is not available. productId = " + order_field.getText());
+					change_field.setText("Product not available.");
 				} catch (SoldOutException se) {
 					System.err.println("Button V Action - At leat one product has been sold out. productId = " + order_field.getText());
 				} catch (ProductDoesNotExistException pe) {
