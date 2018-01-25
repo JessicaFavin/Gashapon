@@ -253,5 +253,17 @@ public class VendingMachine {
     public double getPrice(int productId) {
     	return getProduct(productId).getPrice();
     }
+    
+    public String printContent() {
+    	String content = "";
+    	
+    	for (Product product : this.products) {
+    		content += product.getName() + " (" + product.getId() + ") has " + product.getQuantity() + " left\n";
+    	}
+    	
+    	content += "Cash = " + cashRegister + "\n";
+    	
+    	return content;
+    }
 
 }
