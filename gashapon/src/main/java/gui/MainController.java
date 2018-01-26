@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import vendingMachine.Product;
@@ -92,14 +94,14 @@ public class MainController implements Initializable {
 	private static String order = "";
 	private static boolean gaveChange = false;
 	private static boolean paymentPhase = false;
-
+	
+	private ArrayList<Product> products = new ArrayList<Product>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
 		// create products
-		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
 		products.add(new Product(2.5 ,"sprite.png","Sprite"));
 		products.add(new Product(3,"fanta.png","Fanta"));
@@ -124,7 +126,7 @@ public class MainController implements Initializable {
 	}
 
 	private void initView(ArrayList<Product> products) {
-		String path = "../img/";
+
 
 		Iterator<Product> itr = products.iterator();
 
@@ -166,16 +168,18 @@ public class MainController implements Initializable {
 	}
 
 	private void setProduct(Product product, Label price, Label id, ImageView img) {
+		String path = "@./../img/";
+		
 		price.setText(product.getPrice() + " €");
 		id.setText("" + product.getId());
-		//img.setImage(new Image(path + product.getImg()));
+		img.setImage(new Image(path + product.getImg()));
 	}
 
 	private void initOrderButtonAction() {
 		button_1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				buttonAction("1");
-			}
+				}
 		});
 
 		button_2.setOnAction(new EventHandler<ActionEvent>() {
@@ -245,6 +249,7 @@ public class MainController implements Initializable {
 					} catch(NotEnoughProductException ne) {
 						System.err.println("Button V Action - The product is not available. productId = " + order_field.getText());
 						change_field.setText("Product not available.");
+						
 					} catch (SoldOutException se) {
 						System.err.println("Button V Action - At leat one product has been sold out. productId = " + order_field.getText());
 					} catch (ProductDoesNotExistException pe) {
@@ -359,6 +364,7 @@ public class MainController implements Initializable {
 			this.vendingMachine.statePayOrder(payment);
 		} catch (SoldOutException e) {
 			System.err.println("GiveCHange - At least one product is sold out.");
+			setImageSoldOut();
 			e.printStackTrace();
 		}
 
@@ -373,5 +379,63 @@ public class MainController implements Initializable {
 		order = "";
 
 		System.out.println(vendingMachine.printContent());
+	}
+	
+	private void setImageSoldOut() {
+		
+		for(Product p : products) {
+			if(p.getQuantity() == 0) {
+				switch(p.getId()) {
+					case 1:
+						img_1.setEffect(new GaussianBlur());
+						id_1.setEffect(new GaussianBlur());
+						price_1.setEffect(new GaussianBlur());
+						break;
+					case 2:
+						img_2.setEffect(new GaussianBlur());
+						id_2.setEffect(new GaussianBlur());
+						price_2.setEffect(new GaussianBlur());
+						break;
+					case 3:
+						img_3.setEffect(new GaussianBlur());
+						id_3.setEffect(new GaussianBlur());
+						price_3.setEffect(new GaussianBlur());
+						break;
+					case 4:
+						img_4.setEffect(new GaussianBlur());
+						id_4.setEffect(new GaussianBlur());
+						price_4.setEffect(new GaussianBlur());
+						break;
+					case 5:
+						img_5.setEffect(new GaussianBlur());
+						id_5.setEffect(new GaussianBlur());
+						price_5.setEffect(new GaussianBlur());
+						break;
+					case 6:
+						img_6.setEffect(new GaussianBlur());
+						id_6.setEffect(new GaussianBlur());
+						price_6.setEffect(new GaussianBlur());
+						break;
+					case 7:
+						img_7.setEffect(new GaussianBlur());
+						id_7.setEffect(new GaussianBlur());
+						price_7.setEffect(new GaussianBlur());
+						break;
+					case 8:
+						img_8.setEffect(new GaussianBlur());
+						id_8.setEffect(new GaussianBlur());
+						price_8.setEffect(new GaussianBlur());
+						break;
+					case 9:
+						img_9.setEffect(new GaussianBlur());
+						id_9.setEffect(new GaussianBlur());
+						price_9.setEffect(new GaussianBlur());
+						break;
+					default:
+						System.out.println("No case Found for blurring image");						
+				}	
+			}
+			
+		}
 	}
 }
