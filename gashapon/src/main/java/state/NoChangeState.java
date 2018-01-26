@@ -19,7 +19,7 @@ public class NoChangeState implements State {
 	public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException, ProductDoesNotExistException {
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//checks if ID exists in the vending machine list
-			if(this.vendingMachine.getProducts().get(productId) != null) {
+			if(this.vendingMachine.getProduct(productId) != null) {
 				//add the product to the order list
 				try {
 					this.vendingMachine.addProduct(productId, productQuantity);
@@ -69,7 +69,7 @@ public class NoChangeState implements State {
 			for(int i=0; i<VendingMachine.productsCapacity; i++) {
 				Integer quantity = this.vendingMachine.getOrder().get(i);
 				if(quantity != null) {
-					if(this.vendingMachine.getProducts().get(i).isEmpty()) {
+					if(this.vendingMachine.getProduct(i).isEmpty()) {
 						this.vendingMachine.changeState(this.vendingMachine.getSoldOutState());
 					}
 				}

@@ -19,7 +19,7 @@ public class HasChangeState implements State {
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//checks if ID exists in the vending machine list
 			try {
-				if(this.vendingMachine.getProducts().get(productId) != null) {
+				if(this.vendingMachine.getProduct(productId) != null) {
 					try {
 						this.vendingMachine.addProduct(productId, productQuantity);
 					} catch (NotEnoughProductException e) {
@@ -62,7 +62,7 @@ public class HasChangeState implements State {
 			for(int i=0; i<VendingMachine.productsCapacity; i++) {
 				Integer quantity = this.vendingMachine.getOrder().get(i);
 				if(quantity != null) {
-					if(this.vendingMachine.getProducts().get(i).isEmpty()) {
+					if(this.vendingMachine.getProduct(i).isEmpty()) {
 						this.vendingMachine.changeState(this.vendingMachine.getSoldOutState());
 					}
 				}
