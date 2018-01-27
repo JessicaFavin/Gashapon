@@ -13,4 +13,5 @@ public interface State {
     public void cancelOrder() throws SoldOutException;
     public void callRestockTeam() throws RestockNotNeededException;
     public void giveBackChange() throws SoldOutException;
+    public String toString();
 }

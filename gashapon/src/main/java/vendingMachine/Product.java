@@ -81,6 +81,10 @@ public class Product {
     public String getName(){
         return this.name;
     }
+    
+    public String toString(){
+        return this.name + " (" + this.id + ")";
+    }
 
     private void incrementId(){
         nextId++;

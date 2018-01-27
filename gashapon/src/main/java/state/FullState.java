@@ -1,5 +1,6 @@
 package state;
 
+import vendingMachine.Product;
 import vendingMachine.VendingMachine;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
@@ -16,7 +17,7 @@ public class FullState implements State {
 	}
 
 	@Override
-	public void addProduct(int productId, int productQuantity) throws SoldOutException, NotEnoughProductException {
+	public void addProduct(int productId, int productQuantity) throws NotEnoughProductException, ProductDoesNotExistException {
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//checks if ID exists in the vending machine list
 			if(this.vendingMachine.getProduct(productId) != null) {
@@ -27,8 +28,10 @@ public class FullState implements State {
 					throw new NotEnoughProductException();
 				} catch (ProductDoesNotExistException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					throw new ProductDoesNotExistException();
 				}
+			} else {
+				throw new ProductDoesNotExistException();
 			}
 		}
 	}
@@ -36,20 +39,20 @@ public class FullState implements State {
 	@Override
 	public void orderComplete() throws SoldOutException {
 		//checks if not in the paying phase
-		if(!this.vendingMachine.getWaitingForPayement()) {
+		//if(!this.vendingMachine.getWaitingForPayement()) {
 			this.vendingMachine.orderComplete();
-		}		
+		//}		
 	}
 
 	@Override
 	public void payOrder(double moneyInserted) throws SoldOutException {
 		//checks if not in the paying phase
-		if(this.vendingMachine.getWaitingForPayement()) {
+		//if(this.vendingMachine.getWaitingForPayement()) {
 			//checks if inserted good money
 			if(moneyInserted>0) {
 				this.vendingMachine.insertMoney(moneyInserted);
 			}
-		}		
+		//}		
 	}
 
 	@Override
@@ -63,25 +66,25 @@ public class FullState implements State {
 				this.vendingMachine.changeState(this.vendingMachine.getNoChangeState());
 			}
 			//checks if need to change state to soldOut
-			for(int i=0; i<VendingMachine.productsCapacity; i++) {
-				Integer quantity = this.vendingMachine.getOrder().get(i);
+			for(Product product : this.vendingMachine.getProducts()) {
+				Integer quantity = this.vendingMachine.getOrder().get(product.getId());
 				if(quantity != null) {
-					if(this.vendingMachine.getProduct(i).isEmpty()) {
+					if(product.isEmpty()) {
 						this.vendingMachine.changeState(this.vendingMachine.getSoldOutState());
 					}
 				}
 			}
 			this.vendingMachine.retrieveOrder();
 		}
-
+		
 	}
 
 	@Override
-	public void cancelOrder() throws SoldOutException {
+	public void cancelOrder() {
 		//checks if not in the paying phase
-		if(!this.vendingMachine.getWaitingForPayement()) {
+		//if(!this.vendingMachine.getWaitingForPayement()) {
 			this.vendingMachine.cancelOrder();
-		}
+		//}
 	}
 
 	@Override
@@ -93,6 +96,11 @@ public class FullState implements State {
 	@Override
 	public void giveBackChange() throws SoldOutException {
 		this.vendingMachine.giveBackChange();		
+	}
+	
+	@Override
+	public String toString() {
+		return "FullState";
 	}
 
 }

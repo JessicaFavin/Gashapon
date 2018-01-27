@@ -4,10 +4,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import exception.InitException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
+import exception.RestockNotNeededException;
 import exception.SoldOutException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,10 +17,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import state.SoldOutState;
 import vendingMachine.Product;
 import vendingMachine.VendingMachine;
 
@@ -85,6 +89,9 @@ public class MainController implements Initializable {
 	@FXML private Button coin_10;
 	@FXML private Button coin_20;
 
+	// Progress indicator
+	@FXML private ProgressIndicator progress;
+
 	private VendingMachine vendingMachine;
 	private static double payment = 0;
 	private static double price;
@@ -120,11 +127,13 @@ public class MainController implements Initializable {
 		initOrderButtonAction();
 		initCoinButton();
 
+		progress = new ProgressIndicator(1);
+		progress.setVisible(false);
+
 		System.out.println(vendingMachine.printContent());
 	}
 
 	private void initView(ArrayList<Product> products) {
-		String path = "../img/";
 
 		Iterator<Product> itr = products.iterator();
 
@@ -228,7 +237,7 @@ public class MainController implements Initializable {
 
 		button_v.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
-				if(!paymentPhase) {
+				if(!paymentPhase && order != "") {
 					try {
 						String[] orderArray = order.split(" ");
 						for(String product : orderArray) {
@@ -238,6 +247,7 @@ public class MainController implements Initializable {
 								price += vendingMachine.getPrice(productId);
 							}
 						}
+						vendingMachine.stateOrderComplete();
 						paymentPhase = true;
 						order_field.setText("price: " + price + "€");
 						change_field.setText(price-payment + "€ left");
@@ -282,6 +292,8 @@ public class MainController implements Initializable {
 					System.err.println("Button C Action - At least one product is sold out.");
 					e1.printStackTrace();
 				}
+
+				System.out.println(vendingMachine.printContent());
 			}
 		});
 	}
@@ -337,6 +349,12 @@ public class MainController implements Initializable {
 
 	private void coinAction(double coin) {
 		payment += coin;
+		try {
+			this.vendingMachine.statePayOrder(coin);
+		} catch (SoldOutException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		checkPayment();
 	}
 
@@ -346,17 +364,19 @@ public class MainController implements Initializable {
 				change = payment - price;
 				change_field.setText("in: " + change + " €");
 			} else {
+				//this.vendingMachine.noWaitingForPayment();
 				giveChange();
 			}
+		} else {
+			change_field.setText(price-payment + "€ left");
 		}
 	}
 
 	private void giveChange() {
-		change = payment - price;
-		this.vendingMachine.addCash(price);
 		try {
 			this.vendingMachine.stateRetriveOrder();
-			this.vendingMachine.statePayOrder(payment);
+			change = payment - price;
+			//this.vendingMachine.getChangeToGiveBack();
 		} catch (SoldOutException e) {
 			System.err.println("GiveCHange - At least one product is sold out.");
 			e.printStackTrace();
@@ -371,7 +391,39 @@ public class MainController implements Initializable {
 		gaveChange = true;
 		paymentPhase = false;
 		order = "";
-
+		
 		System.out.println(vendingMachine.printContent());
+		restockMachine();
+	}
+
+	private void restockMachine() {
+		if(this.vendingMachine.getMachineState().getClass() == SoldOutState.class) {			
+			System.out.println("MainController - restockMachine");
+			try {
+				//TimeUnit.SECONDS.sleep(1);
+				progress.setProgress(1);
+				progress.setVisible(true);
+				//Thread.sleep(1000);
+				change_field.setText("");
+				order_field.setText("Restocking ...");
+				//Thread.sleep(1000);
+				//TimeUnit.SECONDS.sleep(1);
+				progress.setProgress(0.5);
+				//TimeUnit.SECONDS.sleep(1);
+				progress.setProgress(0);
+				//TimeUnit.SECONDS.sleep(1);
+				this.vendingMachine.stateRestockMachine();
+			} catch (RestockNotNeededException e) {
+				// TODO Auto-generated catch block
+				System.err.println("No need to restock");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+			
+			progress.setVisible(false);
+			order_field.setText("");
+			System.out.println("MainController - restockMachine - end");
+		}
 	}
 }

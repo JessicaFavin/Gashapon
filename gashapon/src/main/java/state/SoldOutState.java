@@ -45,7 +45,7 @@ public class SoldOutState implements State {
 	}
 	
 	@Override
-	public void callRestockTeam() throws RestockNotNeededException{
+	public void callRestockTeam() {
 		//call the restock team
 		this.vendingMachine.restockMachine();
 		//change to full state
@@ -58,7 +58,10 @@ public class SoldOutState implements State {
 		
 	}
 
-
+	@Override
+	public String toString() {
+		return "SoldOutState";
+	}
 	
 
 }
