@@ -7,6 +7,7 @@ import exception.SoldOutException;
 import exception.InitException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
+import exception.RestockNotNeededException;
 import state.FullState;
 import state.HasChangeState;
 import state.NoChangeState;
@@ -14,143 +15,204 @@ import state.SoldOutState;
 import state.State;
 
 public class VendingMachine {
-    public ArrayList<Product> products; 
-    public static final int productsCapacity = 9;
-    private double cashRegister;
-    private State machineState; 
-    private int amountToPay;
-    private HashMap<Integer, Integer> order;
-    private boolean waitingForPayement;
-    private double changeToGiveBack;
+	public ArrayList<Product> products; 
+	public static final int productsCapacity = 9;
+	private double cashRegister;
+	private State machineState; 
+	private double amountToPay;
+	private HashMap<Integer, Integer> order;
+	private boolean waitingForPayement;
+	private double changeToGiveBack;
+	private double price;
 
-    //list of all the states
-    private State fullState; // all the products are available / priority
-    private State hasChangeState; // the machine has money
-    private State noChangeState; // the machine does not have money
-    private State soldOutState ; // at least one product can not be sold / priority
-    
-    public VendingMachine() throws SoldOutException {
-    	initStates();
-    	this.products = new ArrayList<Product>();
-        this.cashRegister = 0;
-        this.machineState = noChangeState; 
-        this.amountToPay = 0;
-        this.order = new HashMap<Integer, Integer>();
-        this.waitingForPayement = false;
-        this.products = new ArrayList<Product>();
-        changeState(soldOutState);
-    }
+	//list of all the states
+	private State fullState; // all the products are available / priority
+	private State hasChangeState; // the machine has money
+	private State noChangeState; // the machine does not have money
+	private State soldOutState ; // at least one product can not be sold / priority
 
-    public VendingMachine(ArrayList<Product> products) throws InitException {
-    	initStates();
-        this.cashRegister = 0;
-        //if state is not full, it will be changed inside initProducts method 
-        this.machineState = fullState; 
-        this.amountToPay = 0;
-        this.order = new HashMap<Integer, Integer>();
-        this.waitingForPayement = false;
-        this.changeToGiveBack = 0;
-        this.products = new ArrayList<Product>();
-        try {
-        	initProducts(products);
-        } catch(InitException e) {
-        	//should be handle by the controller, shouldn't it ?
-        	throw new InitException();
-        }
-    }
+	public VendingMachine() throws SoldOutException {
+		initStates();
+		this.products = new ArrayList<Product>();
+		this.cashRegister = 0;
+		this.machineState = noChangeState; 
+		this.amountToPay = 0;
+		this.order = new HashMap<Integer, Integer>();
+		this.waitingForPayement = false;
+		this.products = new ArrayList<Product>();
+		changeState(soldOutState);
+	}
 
-    public void addCash(double cashAdded){
-        if(cashAdded>0){
-            this.cashRegister += cashAdded;
-        }
-    }
+	public VendingMachine(ArrayList<Product> products) throws InitException {
+		initStates();
+		this.cashRegister = 0;
+		//if state is not full, it will be changed inside initProducts method 
+		this.machineState = fullState; 
+		this.amountToPay = 0;
+		this.order = new HashMap<Integer, Integer>();
+		this.waitingForPayement = false;
+		this.changeToGiveBack = 0;
+		this.products = new ArrayList<Product>();
+		try {
+			initProducts(products);
+		} catch(InitException e) {
+			throw new InitException(e.getMessage());
+		}
+	}
 
-    public void giveCash(double cashReturned){
-        if (cashReturned<=cashRegister){
-            this.cashRegister -= cashReturned;
-        }
-    }
-    
-    /*
-     * Customer add product to order list
-     */
-    public void addProduct(int productId, int productQuantity) throws NotEnoughProductException, ProductDoesNotExistException {
-    	Product productToAdd = this.getProduct(productId);
-    	if(productToAdd == null)
-    		throw new ProductDoesNotExistException();
-    	if(productToAdd.getQuantity()-productQuantity >= 0) {
-    		//add product to the order
-        	this.order.put(productId, productQuantity);
-        	//add price of products added
-        	this.amountToPay += productToAdd.getPrice()*productQuantity;
-        	//takes products from the machine
-        	productToAdd.buyProduct(productQuantity);
-    	} else {
-    		throw new NotEnoughProductException();
-    	}
-    }
-    
-    public void statePayOrder(double moneyInserted) throws SoldOutException {
-    	this.machineState.payOrder(moneyInserted);
-    }
-    
-    public void stateAddProduct(int productId, int productQuantity) throws NotEnoughProductException, SoldOutException, ProductDoesNotExistException {
-    	machineState.addProduct(productId, productQuantity);
-    }
-    
-    public void orderComplete() {
-    	this.waitingForPayement = true;
-    }
-    
-    public void insertMoney(double moneyInserted) {
-    	this.amountToPay -= moneyInserted;
-    }
-    
-    public boolean getWaitingForPayement() {
-    	return this.waitingForPayement;
-    }
-    
-    public void restockMachine() {
-    	for(Product product: this.products) {
-    		product.restockProduct();
-    	}
-    }
-    
-    public void stateRetriveOrder() throws SoldOutException {
-    	machineState.retrieveOrder();
-    }
-    
-    public void retrieveOrder() {
-    	this.order.clear();
-    	if(this.amountToPay<0) {
-    		this.changeToGiveBack = -1*this.amountToPay;
-    	}
-    	this.amountToPay = 0;
-    }
-    
-    public void giveBackChange() {
-    	this.changeToGiveBack = 0;
-    }
-    
-    public void cancelOrder() {
-    	this.order.clear();
-    	this.amountToPay = 0;
-    	//puts the products back in the machine's list
-    	for(int i=0; i<VendingMachine.productsCapacity; i++) {
+	public void addCash(double cashAdded){
+		System.out.println("VendingMachine - addCash - cashAdded = " + cashAdded);
+		if(cashAdded>0){
+			this.cashRegister += cashAdded;
+		}
+	}
+
+	public void giveCash(double cashReturned){
+		System.out.println("VendingMachine - giveCash - cashReturned = " + cashReturned);
+		if (cashReturned<=cashRegister){
+			this.cashRegister -= cashReturned;
+		}
+	}
+
+	/*
+	 * Customer add product to order list
+	 */
+	public void addProduct(int productId, int productQuantity) throws NotEnoughProductException, ProductDoesNotExistException {
+		System.out.println("VendingMachine - addProduct - productId = " + productId);
+		Product productToAdd = this.getProduct(productId);
+		if(productToAdd == null)
+			throw new ProductDoesNotExistException();
+		if(productToAdd.getQuantity()-productQuantity >= 0) {
+			//add product to the order
+			if(!this.order.containsKey(productId)) {
+				this.order.put(productId, productQuantity);
+			} else {
+				this.order.put(productId, this.order.get(productId)+productQuantity);
+			}
+			//add price of products added
+			this.amountToPay += productToAdd.getPrice()*productQuantity;
+			this.price = this.amountToPay;
+		} else {
+			throw new NotEnoughProductException();
+		}
+	}
+
+	public void statePayOrder(double moneyInserted) throws SoldOutException {
+		System.out.println("VendingMachine - statePayOrder - waitingForPayement = " + this.waitingForPayement);
+		System.out.println("VendingMachine - statePayOrder - machineState = " + this.machineState);
+		this.machineState.payOrder(moneyInserted);
+	}
+
+	public void stateAddProduct(int productId, int productQuantity) throws NotEnoughProductException, SoldOutException, ProductDoesNotExistException {
+		System.out.println("VendingMachine - stateAddProduct - waitingForPayement = " + this.waitingForPayement);
+		System.out.println("VendingMachine - stateAddProduct - machineState = " + this.machineState);
+		System.out.println("VendingMachine - stateAddProduct - productId = " + productId);
+		System.out.println("VendingMachine - stateAddProduct - getProduct = " + getProduct(productId));
+		machineState.addProduct(productId, productQuantity);
+	}
+
+	public void orderComplete() {
+		if(this.amountToPay <= 0) {
+			this.waitingForPayement = false;
+		} else {
+			this.waitingForPayement = true;
+		}
+	}
+
+	public void stateOrderComplete() throws SoldOutException {
+		this.machineState.orderComplete();
+	}
+
+	public void insertMoney(double moneyInserted) {
+		System.out.println("VendingMachine - insertMoney - moneyInserted = " + moneyInserted);
+		this.amountToPay -= moneyInserted;
+		addCash(moneyInserted);
+		System.out.println("VendingMachine - insertMoney - amountToPay = " + this.amountToPay);
+		if(this.amountToPay <= 0) {
+			this.waitingForPayement = false;
+		}
+	}
+
+	public boolean getWaitingForPayement() {
+		return this.waitingForPayement;
+	}
+	
+	public void stateRestockMachine() throws RestockNotNeededException {
+		this.machineState.callRestockTeam();
+	}
+
+	public void restockMachine() {
+		for(Product product: this.products) {
+			product.restockProduct();
+		}
+	}
+
+	public void stateRetriveOrder() throws SoldOutException {
+		System.out.println("VendingMachine - stateRetrieveOrder - waitingForPayement = " + this.waitingForPayement);
+		System.out.println("VendingMachine - stateRetrieveOrder - machineState = " + this.machineState);
+		System.out.println("VendingMachine - stateRetrieveOrder - amountToPay = " + this.amountToPay);
+		if(this.amountToPay <= 0) {
+			this.machineState.retrieveOrder();
+		}
+	}
+
+	public void retrieveOrder() {
+		System.out.println("VendingMachine - retrieveOrder");
+		// take products
+		for (HashMap.Entry<Integer, Integer> entry : order.entrySet()) {
+			Integer id = entry.getKey();
+			Integer quantity = entry.getValue();
+			System.out.println("VendingMachine - retrieveOrder - id = " + id + " quantity = " + quantity);
+			getProduct(id).buyProduct(quantity);
+		}
+		this.order.clear();
+		// TODO: test
+		this.changeToGiveBack = 0;
+		if(this.amountToPay<0) {
+			this.changeToGiveBack = -1*this.amountToPay;
+			giveCash(this.changeToGiveBack);
+		}
+		this.amountToPay = 0;
+		this.price = 0;
+		this.waitingForPayement = false;
+		
+		checkMachineState();
+	}
+
+	public void giveBackChange() {
+		this.changeToGiveBack = 0;
+	}
+
+	public void cancelOrder() {
+		System.out.println("VendingMachine - cancelOrder");
+		giveCash(price-amountToPay);
+		this.order.clear();
+		this.amountToPay = 0;
+		this.price = 0;
+		//puts the products back in the machine's list
+		for(int i=0 ; i<products.size() ; i++) {
+			Integer quantity = this.order.get(products.get(i).getId());
+			if(quantity != null) {
+				products.get(i).putBackProduct(quantity.intValue());
+			}
+		}
+		/*
+		for(int i=0; i<VendingMachine.productsCapacity; i++) {
 			Integer productQuantity = this.order.get(i);
 			int productId = i;
 			if(productQuantity != null) {
 				Product product = this.products.get(productId);
-	    		product.putBackProduct(productQuantity.intValue());
+				product.putBackProduct(productQuantity.intValue());
 			}
 		}
-    }
-    
-    public void stateCancelOrder() throws SoldOutException {
-    	this.machineState.cancelOrder();
-    }
+		*/
+	}
 
-    /*
+	public void stateCancelOrder() throws SoldOutException {
+		this.machineState.cancelOrder();
+	}
+
+	/*
     public void restockMachine(ArrayList<Product> products) {
     	boolean filled = false;
     	for(Product p: products) {
@@ -167,103 +229,142 @@ public class VendingMachine {
     		}
     	}
     }
-    */
+	 */
 
-    
-    private void initStates() {
-    	this.fullState = new FullState(this);
-    	this.hasChangeState = new HasChangeState(this);
-    	this.noChangeState = new NoChangeState(this);
-    	this.soldOutState = new SoldOutState(this);
-    }
-    
-    public State getFullState() {
-    	return this.fullState;
-    }
-    
-    public State getHasChangeState() {
-    	return this.hasChangeState;
-    }
-    
-    public State getNoChangeState() {
-    	return this.noChangeState;
-    }
-    
-    public State getSoldOutState() {
-    	return this.soldOutState;
-    }
-    
-    public void changeState(State newState) {
-    	this.machineState = newState;
-    }
-    
-    public boolean hasChange() {
-    	return (this.cashRegister>15 && this.cashRegister%7==0);
-    }
-    
-    private void initProducts(ArrayList<Product> products) throws InitException {
-    	//if the list of products contains enough products to fill the machine
-    	if(products.size() >= VendingMachine.productsCapacity) {
-    		int i = 0;
-    		for(Product p : products) {
-    			if(i >= VendingMachine.productsCapacity) {
-    				break;
-    			}
-    			this.products.add(p);
-    			if(p.isEmpty()) {
-    				this.changeState(this.soldOutState);
-    			} else if(!p.isFull()) {
-    				this.changeState(this.noChangeState);
-    			}
-    			
-    			i++;
-    		}
-    	} else {
-    		//if there's not enough products throw init exception
-    		throw new InitException();
-    	}
-    }
-    
-    public ArrayList<Product> getProducts(){
-    	return this.products;
-    }
-    
-    public Product getProduct(int id) {
-    	for(Product product : this.products) {
-    		if(product.isSame(id)) {
-    			return product;
-    		}
-    	}
-    	
-    	return null;
-    }
-    
-    public HashMap<Integer, Integer> getOrder() {
-    	return this.order;
-    }
-    
-    public double getChangeToGiveBack() {
-    	return this.changeToGiveBack;
-    }
-    
-    public State getMachineState() {
-    	return this.machineState;
-    }
-    
-    public double getPrice(int productId) {
-    	return getProduct(productId).getPrice();
-    }
-    
-    public String printContent() {
-    	String content = "";
-    	
-    	for (Product product : this.products) {
-    		content += product.getName() + " (" + product.getId() + ") has " + product.getQuantity() + " left\n";
-    	}
-    	
-    	content += "Cash = " + cashRegister + "\n";
-    	
-    	return content;
-    }
+
+	private void initStates() {
+		this.fullState = new FullState(this);
+		this.hasChangeState = new HasChangeState(this);
+		this.noChangeState = new NoChangeState(this);
+		this.soldOutState = new SoldOutState(this);
+	}
+
+	public State getFullState() {
+		return this.fullState;
+	}
+
+	public State getHasChangeState() {
+		return this.hasChangeState;
+	}
+
+	public State getNoChangeState() {
+		return this.noChangeState;
+	}
+
+	public State getSoldOutState() {
+		return this.soldOutState;
+	}
+
+	public void changeState(State newState) {
+		this.machineState = newState;
+	}
+
+	public boolean hasChange() {
+		return (this.cashRegister>15 && this.cashRegister%7==0);
+	}
+
+	private void initProducts(ArrayList<Product> products) throws InitException {
+		//if the list of products contains enough products to fill the machine
+		if(products.size() > 0) {
+			int i = 0;
+			for(Product p : products) {
+				if(i >= VendingMachine.productsCapacity) {
+					throw new InitException("Too much products.");
+				}
+				this.products.add(p);
+				if(p.isEmpty()) {
+					this.changeState(this.soldOutState);
+				} else if(!p.isFull()) {
+					this.changeState(this.noChangeState);
+				}
+
+				i++;
+			}
+		} else {
+			//if there's not enough products throw init exception
+			throw new InitException("No product");
+		}
+	}
+
+	public ArrayList<Product> getProducts(){
+		return this.products;
+	}
+
+	public Product getProduct(int id) {
+		for(int i=0 ; i < products.size() ; i++) {
+			if(products.get(i).isSame(id)) {
+				return products.get(i);
+			}
+		}
+		/*
+		for(Product product : this.products) {
+			if(product.isSame(id)) {
+				return product;
+			}
+		}
+		*/
+
+		return null;
+	}
+
+	public HashMap<Integer, Integer> getOrder() {
+		return this.order;
+	}
+
+	public double getChangeToGiveBack() {
+		return this.changeToGiveBack;
+	}
+
+	public State getMachineState() {
+		return this.machineState;
+	}
+
+	public double getPrice(int productId) {
+		return getProduct(productId).getPrice();
+	}
+
+	public String printContent() {
+		String content = "";
+
+		for (Product product : this.products) {
+			content += product.getName() + " (" + product.getId() + ") has " + product.getQuantity() + " left\n";
+		}
+
+		content += "Cash = " + cashRegister + "\n";
+
+		return content;
+	}
+
+	public double getCash() {
+		return cashRegister;
+	}
+
+	public void noWaitingForPayment() {
+		this.waitingForPayement = false;
+	}
+	
+	public void checkMachineState() {
+		boolean full = true;
+		for(Product product : products) {
+			if(product.isEmpty()) {
+				changeState(this.soldOutState);
+				return;
+			} else if(!product.isFull()){
+				full = false;
+			}
+		}
+		
+		if(full) {
+			changeState(this.fullState);
+			return;
+		}
+		
+		if(this.cashRegister == 0) {
+			changeState(this.noChangeState);
+			return;
+		}
+		
+		changeState(this.hasChangeState);
+	}
 
 }

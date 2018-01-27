@@ -4,6 +4,7 @@ import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
 import exception.SoldOutException;
+import vendingMachine.Product;
 import vendingMachine.VendingMachine;
 
 public class NoChangeState implements State {
@@ -35,25 +36,23 @@ public class NoChangeState implements State {
 	@Override
 	public void orderComplete() throws SoldOutException {
 		//checks if not in the paying phase
-		if(!this.vendingMachine.getWaitingForPayement()) {
+		//if(!this.vendingMachine.getWaitingForPayement()) {
 			this.vendingMachine.orderComplete();
-		}		
+		//}		
 	}
 
 	@Override
 	public void payOrder(double moneyInserted) throws SoldOutException {
-		//TO DO
+		// TODO
 		//has to make sure user has the exact right amount of money
 		
-		/*
 		//checks if not in the paying phase
-		if(this.vendingMachine.getWaitingForPayement()) {
+		//if(this.vendingMachine.getWaitingForPayement()) {
 			//checks if inserted good money
 			if(moneyInserted>0) {
 				this.vendingMachine.insertMoney(moneyInserted);
 			}
-		}		
-		*/
+		//}		
 		
 	}
 
@@ -66,25 +65,24 @@ public class NoChangeState implements State {
 				this.vendingMachine.changeState(this.vendingMachine.getHasChangeState());
 			}
 			//checks if need to change state to soldOut
-			for(int i=0; i<VendingMachine.productsCapacity; i++) {
-				Integer quantity = this.vendingMachine.getOrder().get(i);
+			for(Product product : this.vendingMachine.getProducts()) {
+				Integer quantity = this.vendingMachine.getOrder().get(product.getId());
 				if(quantity != null) {
-					if(this.vendingMachine.getProduct(i).isEmpty()) {
+					if(product.isEmpty()) {
 						this.vendingMachine.changeState(this.vendingMachine.getSoldOutState());
 					}
 				}
 			}
 			this.vendingMachine.retrieveOrder();
 		}
-		
 	}
 
 	@Override
 	public void cancelOrder() throws SoldOutException {
 		//checks if not in the paying phase
-		if(!this.vendingMachine.getWaitingForPayement()) {
+		//if(!this.vendingMachine.getWaitingForPayement()) {
 			this.vendingMachine.cancelOrder();
-		}
+		//}
 	}
 
 	@Override
@@ -96,6 +94,11 @@ public class NoChangeState implements State {
 	@Override
 	public void giveBackChange() throws SoldOutException {
 		this.vendingMachine.giveBackChange();		
+	}
+	
+	@Override
+	public String toString() {
+		return "NoChangeState";
 	}
 
 	
