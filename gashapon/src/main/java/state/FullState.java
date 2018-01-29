@@ -63,6 +63,7 @@ public class FullState implements State {
 		//checks if not in the paying phase
 		if(!this.vendingMachine.getWaitingForPayement()) {
 			//changes state to hasChange or noChange
+			System.out.println("cash = " + this.vendingMachine.getCash());
 			if(this.vendingMachine.hasChange()) {
 				this.vendingMachine.changeState(this.vendingMachine.getHasChangeState());
 			} else {
