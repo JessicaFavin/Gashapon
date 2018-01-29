@@ -11,6 +11,7 @@ then # conflicts ?
 	echo " "
 	echo "First pull is successful"
 	echo " "
+	git commit -m "$*"
 	git merge perso_celande
 	if [ $? -eq $success ]
 	then # conflicts ?
@@ -29,19 +30,19 @@ then # conflicts ?
 			git merge master
 		else
 			echo " "
-			echo "Back to perso_celande"
+			echo "Back to perso_celande 1"
 			echo " "
 			git checkout perso_celande
 		fi
 	else
 		echo " "
-		echo "Back to perso_celande"
+		echo "Back to perso_celande 2"
 		echo " "
 		git checkout perso_celande
 	fi
 else
 	echo " "
-	echo "Back to perso_celande"
+	echo "Back to perso_celande 3"
 	echo " "
 	git checkout perso_celande
 fi
