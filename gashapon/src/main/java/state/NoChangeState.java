@@ -1,5 +1,6 @@
 package state;
 
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
@@ -35,24 +36,24 @@ public class NoChangeState implements State {
 
 	@Override
 	public void orderComplete() throws SoldOutException {
-		//checks if not in the paying phase
-		//if(!this.vendingMachine.getWaitingForPayement()) {
-			this.vendingMachine.orderComplete();
-		//}		
+		this.vendingMachine.orderComplete();
 	}
 
 	@Override
-	public void payOrder(double moneyInserted) throws SoldOutException {
-		// TODO
+	public void payOrder(double moneyInserted) throws SoldOutException, NoChangeException {
+
 		//has to make sure user has the exact right amount of money
+		//-> needs to warn the client 
+		//Then take all the money except if bigger than what is owed
 		
-		//checks if not in the paying phase
-		//if(this.vendingMachine.getWaitingForPayement()) {
-			//checks if inserted good money
-			if(moneyInserted>0) {
+		//checks if inserted good money
+		if(moneyInserted>0) {
+			if(moneyInserted > this.vendingMachine.getAmountToPay()) {
+				throw new NoChangeException();
+			} else {
 				this.vendingMachine.insertMoney(moneyInserted);
 			}
-		//}		
+		}	
 		
 	}
 
@@ -79,15 +80,12 @@ public class NoChangeState implements State {
 
 	@Override
 	public void cancelOrder() throws SoldOutException {
-		//checks if not in the paying phase
-		//if(!this.vendingMachine.getWaitingForPayement()) {
-			this.vendingMachine.cancelOrder();
-		//}
+		this.vendingMachine.cancelOrder();
 	}
 
 	@Override
 	public void callRestockTeam() throws RestockNotNeededException {
-		// TODO Auto-generated method stub
+		throw new RestockNotNeededException();
 		
 	}
 

@@ -2,6 +2,7 @@ package state;
 
 import vendingMachine.Product;
 import vendingMachine.VendingMachine;
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
@@ -38,21 +39,15 @@ public class FullState implements State {
 
 	@Override
 	public void orderComplete() throws SoldOutException {
-		//checks if not in the paying phase
-		//if(!this.vendingMachine.getWaitingForPayement()) {
-			this.vendingMachine.orderComplete();
-		//}		
+		this.vendingMachine.orderComplete();
 	}
 
 	@Override
-	public void payOrder(double moneyInserted) throws SoldOutException {
-		//checks if not in the paying phase
-		//if(this.vendingMachine.getWaitingForPayement()) {
-			//checks if inserted good money
-			if(moneyInserted>0) {
-				this.vendingMachine.insertMoney(moneyInserted);
-			}
-		//}		
+	public void payOrder(double moneyInserted) throws SoldOutException, NoChangeException {
+		//checks if inserted good money
+		if(moneyInserted>0) {
+			this.vendingMachine.insertMoney(moneyInserted);
+		}	
 	}
 
 	@Override
@@ -81,15 +76,12 @@ public class FullState implements State {
 
 	@Override
 	public void cancelOrder() {
-		//checks if not in the paying phase
-		//if(!this.vendingMachine.getWaitingForPayement()) {
-			this.vendingMachine.cancelOrder();
-		//}
+		this.vendingMachine.cancelOrder();
 	}
 
 	@Override
 	public void callRestockTeam() throws RestockNotNeededException {
-		// TODO Auto-generated method stub
+		throw new RestockNotNeededException();
 
 	}
 

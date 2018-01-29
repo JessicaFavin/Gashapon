@@ -1,10 +1,13 @@
 package vendingMachine;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
+import java.util.Map;
 
 import exception.SoldOutException;
 import exception.InitException;
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
@@ -15,12 +18,12 @@ import state.SoldOutState;
 import state.State;
 
 public class VendingMachine {
-	public ArrayList<Product> products; 
+	public List<Product> products; 
 	public static final int productsCapacity = 9;
 	private double cashRegister;
 	private State machineState; 
 	private double amountToPay;
-	private HashMap<Integer, Integer> order;
+	private Map<Integer, Integer> order;
 	private boolean waitingForPayement;
 	private double changeToGiveBack;
 	private double price;
@@ -43,7 +46,7 @@ public class VendingMachine {
 		changeState(soldOutState);
 	}
 
-	public VendingMachine(ArrayList<Product> products) throws InitException {
+	public VendingMachine(List<Product> products) throws InitException {
 		initStates();
 		this.cashRegister = 0;
 		//if state is not full, it will be changed inside initProducts method 
@@ -101,7 +104,7 @@ public class VendingMachine {
 		}
 	}
 
-	public void statePayOrder(double moneyInserted) throws SoldOutException {
+	public void statePayOrder(double moneyInserted) throws SoldOutException, NoChangeException {
 		System.out.println("VendingMachine - statePayOrder - waitingForPayement = " + this.waitingForPayement);
 		System.out.println("VendingMachine - statePayOrder - machineState = " + this.machineState);
 		this.machineState.payOrder(moneyInserted);
@@ -163,7 +166,7 @@ public class VendingMachine {
 	public void retrieveOrder() {
 		System.out.println("VendingMachine - retrieveOrder");
 		// take products
-		for (HashMap.Entry<Integer, Integer> entry : order.entrySet()) {
+		for (Map.Entry<Integer, Integer> entry : order.entrySet()) {
 			Integer id = entry.getKey();
 			Integer quantity = entry.getValue();
 			System.out.println("VendingMachine - retrieveOrder - id = " + id + " quantity = " + quantity);
@@ -200,41 +203,11 @@ public class VendingMachine {
 				products.get(i).putBackProduct(quantity.intValue());
 			}
 		}
-		/*
-		for(int i=0; i<VendingMachine.productsCapacity; i++) {
-			Integer productQuantity = this.order.get(i);
-			int productId = i;
-			if(productQuantity != null) {
-				Product product = this.products.get(productId);
-				product.putBackProduct(productQuantity.intValue());
-			}
-		}
-		*/
 	}
 
 	public void stateCancelOrder() throws SoldOutException {
 		this.machineState.cancelOrder();
 	}
-
-	/*
-    public void restockMachine(ArrayList<Product> products) {
-    	boolean filled = false;
-    	for(Product p: products) {
-    		filled = false;
-    		for(int i=0 ; i < this.products.size() ; i++) {
-    			if(p.isSame(this.products.get(i))) {
-    				this.products.get(i).restockProduct(p.getQuantity());
-    				filled = true;
-    				break;
-    			}
-    		}
-    		if(!filled) {
-    			this.products.add(p);
-    		}
-    	}
-    }
-	 */
-
 
 	private void initStates() {
 		this.fullState = new FullState(this);
@@ -267,7 +240,7 @@ public class VendingMachine {
 		return (this.cashRegister>15 && this.cashRegister%7==0);
 	}
 
-	private void initProducts(ArrayList<Product> products) throws InitException {
+	private void initProducts(List<Product> products) throws InitException {
 		//if the list of products contains enough products to fill the machine
 		if(products.size() > 0) {
 			int i = 0;
@@ -290,28 +263,20 @@ public class VendingMachine {
 		}
 	}
 
-	public ArrayList<Product> getProducts(){
+	public List<Product> getProducts(){
 		return this.products;
 	}
 
 	public Product getProduct(int id) {
-		for(int i=0 ; i < products.size() ; i++) {
-			if(products.get(i).isSame(id)) {
-				return products.get(i);
+		for(int i=0 ; i < this.products.size() ; i++) {
+			if(this.products.get(i).isSame(id)) {
+				return this.products.get(i);
 			}
 		}
-		/*
-		for(Product product : this.products) {
-			if(product.isSame(id)) {
-				return product;
-			}
-		}
-		*/
-
 		return null;
 	}
 
-	public HashMap<Integer, Integer> getOrder() {
+	public Map<Integer, Integer> getOrder() {
 		return this.order;
 	}
 
@@ -334,13 +299,13 @@ public class VendingMachine {
 			content += product.getName() + " (" + product.getId() + ") has " + product.getQuantity() + " left\n";
 		}
 
-		content += "Cash = " + cashRegister + "\n";
+		content += "Cash = " + this.cashRegister + "\n";
 
 		return content;
 	}
 
 	public double getCash() {
-		return cashRegister;
+		return this.cashRegister;
 	}
 
 	public void noWaitingForPayment() {
@@ -349,7 +314,7 @@ public class VendingMachine {
 	
 	public void checkMachineState() {
 		boolean full = true;
-		for(Product product : products) {
+		for(Product product : this.products) {
 			if(product.isEmpty()) {
 				changeState(this.soldOutState);
 				return;
@@ -369,6 +334,10 @@ public class VendingMachine {
 		}
 		
 		changeState(this.hasChangeState);
+	}
+	
+	public double getAmountToPay() {
+		return this.amountToPay;
 	}
 
 }
