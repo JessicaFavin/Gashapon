@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
 
 import exception.InitException;
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.SoldOutException;
@@ -115,6 +116,8 @@ class VendingMachineTest {
 
 		} catch (InitException e) {
 			e.printStackTrace();
+		} catch (NoChangeException e) {
+			e.printStackTrace();
 		}
 		// Assert
 		assertTrue((this.machine.getCash() == 2) && (this.machine.getProduct(product.getId()).getQuantity() == (Product.maxQuantity-1)));
@@ -138,9 +141,28 @@ class VendingMachineTest {
 
 		} catch (InitException e) {
 			e.print();
+		} catch (NoChangeException e) {
+			e.printStackTrace();
 		}
 		// Assert
 		assertTrue((this.machine.getCash() == 1) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity));
+	}
+
+	@Test
+	public void testBuyItemWithMoreThanPriceWithNoChange() {
+		// Arrange
+		ArrayList<Product> products = new ArrayList<Product>();
+		products.add(new Product(2,"coke.png","Coke"));
+		// Act & Assert
+		assertThrows(NoChangeException.class, 
+				()->{
+					Product product = products.get(0);
+					this.machine = new VendingMachine(products);
+					this.machine.stateAddProduct(product.getId(), 1);
+					this.machine.stateOrderComplete();
+					this.machine.statePayOrder(5);
+					this.machine.stateRetriveOrder();}
+				);
 	}
 
 	@Test
@@ -152,6 +174,13 @@ class VendingMachineTest {
 		Product product = products.get(0);
 		try {
 			this.machine = new VendingMachine(products);
+			// get out of nochange state
+			this.machine.stateAddProduct(product.getId(), 1);
+			this.machine.stateOrderComplete();
+			this.machine.statePayOrder(2);
+			this.machine.stateRetriveOrder();
+			
+			// get out of nochange state
 			this.machine.stateAddProduct(product.getId(), 1);
 			this.machine.stateOrderComplete();
 			this.machine.statePayOrder(5);
@@ -161,9 +190,11 @@ class VendingMachineTest {
 
 		} catch (InitException e) {
 			e.print();
+		} catch (NoChangeException e) {
+			e.printStackTrace();
 		}
 		// Assert
-		assertTrue((this.machine.getCash() == 2) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity-1));
+		assertTrue((this.machine.getCash() == 4) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity-2));
 	}
 
 	@Test
@@ -178,13 +209,15 @@ class VendingMachineTest {
 			this.machine = new VendingMachine(products);
 			this.machine.stateAddProduct(product.getId(), 2);
 			this.machine.stateOrderComplete();
-			this.machine.statePayOrder(5);
+			this.machine.statePayOrder(4);
 			this.machine.stateRetriveOrder();
 		} catch (NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
 			e.printStackTrace();
 
 		} catch (InitException e) {
 			e.print();
+		} catch (NoChangeException e) {
+			e.printStackTrace();
 		}
 		// Assert
 		assertTrue((this.machine.getCash() == 4) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity-2));
@@ -211,6 +244,8 @@ class VendingMachineTest {
 
 		} catch (InitException e) {
 			e.print();
+		} catch (NoChangeException e) {
+			e.printStackTrace();
 		}
 		// Assert
 		assertTrue((this.machine.getCash() == 5) 
@@ -242,7 +277,6 @@ class VendingMachineTest {
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
 		// Act & Assert
-		Product product = products.get(0);
 		assertThrows(ProductDoesNotExistException.class, 
 				()->{
 					this.machine = new VendingMachine(products);
@@ -295,6 +329,8 @@ class VendingMachineTest {
 
 		} catch (InitException e) {
 			e.print();
+		} catch (NoChangeException e) {
+			e.printStackTrace();
 		}
 		// Assert
 		assertTrue((this.machine.getCash() == 0) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity));
@@ -313,7 +349,7 @@ class VendingMachineTest {
 		products.add(new Product(2,"apple_sauce.png","Apple sauce"));
 		products.add(new Product(2.5 ,"water.png","Water"));
 		products.add(new Product(3,"sparkling_water.png","Sparkling water"));
-		
+
 		Product product = products.get(0);
 		// Act
 		try {
@@ -323,6 +359,8 @@ class VendingMachineTest {
 			this.machine.statePayOrder(2*Product.maxQuantity);
 			this.machine.stateRetriveOrder();
 		} catch (InitException | NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
+			e.printStackTrace();
+		} catch (NoChangeException e) {
 			e.printStackTrace();
 		}
 		// Assert
