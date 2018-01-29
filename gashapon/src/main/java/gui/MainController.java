@@ -265,12 +265,17 @@ public class MainController implements Initializable {
 						checkPayment();
 					} catch(NotEnoughProductException ne) {
 						System.err.println("Button V Action - The product is not available. productId = " + order_field.getText());
+						change_field.setAlignment(Pos.BASELINE_LEFT);
 						change_field.setText("Product not available.");
+						change_field.setAlignment(Pos.CENTER);
 
 					} catch (SoldOutException se) {
 						System.err.println("Button V Action - At leat one product has been sold out. productId = " + order_field.getText());
 					} catch (ProductDoesNotExistException pe) {
 						System.err.println("Button V Action - The product does not exist. productId = " + order_field.getText());
+						change_field.setAlignment(Pos.BASELINE_LEFT);
+						change_field.setText("Product not available.");
+						change_field.setAlignment(Pos.CENTER);
 					}catch (Exception ex) {
 						ex.printStackTrace();
 						System.err.println("Button V Action - Error in validation. productId = " + order_field.getText());
@@ -369,7 +374,9 @@ public class MainController implements Initializable {
 			e.printStackTrace();
 		} catch (NoChangeException e) {
 			payment -= coin;
+			change_field.setAlignment(Pos.BASELINE_LEFT);
 			change_field.setText("No change available");
+			change_field.setAlignment(Pos.CENTER);
 			e.printStackTrace();
 		}
 	}
@@ -412,7 +419,6 @@ public class MainController implements Initializable {
 
 	private void restockMachine() {
 		if(this.vendingMachine.getMachineState().getClass() == SoldOutState.class) {			
-			System.out.println("MainController - restockMachine");
 			setImageSoldOut();
 			int sec = 0;
 			Timeline timeline = new Timeline();
@@ -453,7 +459,7 @@ public class MainController implements Initializable {
 
 						public void handle(ActionEvent event) {
 
-							progress.setProgress(1);
+							progress.setProgress(0);
 
 						}
 					});
@@ -470,8 +476,7 @@ public class MainController implements Initializable {
 							}
 							progress.setVisible(false);
 							order_field.setText("");
-							initView();
-
+							removeAllEffect();
 						}
 					});
 			timeline.getKeyFrames().add(showProgress);
@@ -530,5 +535,23 @@ public class MainController implements Initializable {
 			id.setEffect(new GaussianBlur());
 			price.setEffect(new GaussianBlur());
 		}
+	}
+	
+	private void removeAllEffect() {
+		removeEffect(price_1, id_1, img_1);
+		removeEffect(price_2, id_2, img_2);
+		removeEffect(price_3, id_3, img_3);
+		removeEffect(price_4, id_4, img_4);
+		removeEffect(price_5, id_5, img_5);
+		removeEffect(price_6, id_6, img_6);
+		removeEffect(price_7, id_7, img_7);
+		removeEffect(price_8, id_8, img_8);
+		removeEffect(price_9, id_9, img_9);
+	}
+	
+	private void removeEffect(Label price, Label id, ImageView img) {
+		price.setEffect(null);
+		id.setEffect(null);
+		img.setEffect(null);
 	}
 }
