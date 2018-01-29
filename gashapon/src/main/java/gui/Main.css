@@ -1,10 +1,9 @@
 #root{
 
     -fx-background-color: rgba(0, 0, 0, 0.13);
-    -fx-border-color: #ff0007;
-    -fx-border-radius: 10;
-    -fx-border-insets: 5;
-    -fx-border-width: 3;
+    -fx-border-color: #ab0006;
+    -fx-border-insets: -1;
+    -fx-border-width: 20;
 
 }
 
@@ -39,7 +38,7 @@
 }
 
 
-.VBox_2{
+.VBox{
     -fx-border-color: #6d6d6d;
     -fx-border-radius: 10;
     -fx-border-width: 3;
@@ -47,16 +46,16 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 10, 0, 3, -3);
 }
 
-.VBox_1{
+.Box{
     -fx-background-color: #9d9d9d;
 
     -fx-background-radius: 10;
     -fx-background-insets: 2;
 
-    -fx-border-color: rgba(0, 0, 0, 0.4);
+    -fx-border-color: rgba(0, 0, 0, 0.51);
     -fx-border-insets: 2;
     -fx-border-radius: 10;
-    -fx-border-width: 0 1 0 1;
+    -fx-border-width: 1 1 1 1;
 }
 
 #img_1{

@@ -28,9 +28,9 @@
 	<children>
 		<HBox id="root" alignment="CENTER" stylesheets="@Main.css">
 			<children>
-				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" styleClass="VBox_1" HBox.hgrow="ALWAYS">
+				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" HBox.hgrow="ALWAYS">
 					<children>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
 								<ImageView fx:id="img_1" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -61,16 +61,16 @@
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
 						</VBox>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
 								<ImageView fx:id="img_4" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-										<Image url="@./../ressources/img/mms.jpg" />
-									</image>
 									<VBox.margin>
 										<Insets top="5.0" />
 									</VBox.margin>
@@ -101,16 +101,16 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
 						</VBox>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
 								<ImageView fx:id="img_7" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-										<Image url="@./../ressources/img/mms.jpg" />
-									</image>
 									<VBox.margin>
 										<Insets top="5.0" />
 									</VBox.margin>
@@ -141,6 +141,9 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
 						</VBox>
@@ -148,14 +151,10 @@
 				</VBox>
 				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" styleClass="VBox_1">
 					<children>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
-								<ImageView fx:id="img_2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-										<Image url="@./../ressources/img/mms.jpg" />
-									</image>
-								</ImageView>
+								<ImageView fx:id="img_2" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane prefHeight="200.0" prefWidth="200.0" />
 								<HBox alignment="CENTER" maxHeight="35.0" prefHeight="100.0" prefWidth="200.0">
 									<children>
@@ -182,16 +181,16 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
 						</VBox>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
 								<ImageView fx:id="img_5" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-										<Image url="@./../ressources/img/mms.jpg" />
-									</image>
 									<VBox.margin>
 										<Insets top="5.0" />
 									</VBox.margin>
@@ -222,16 +221,16 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
 						</VBox>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
 								<ImageView fx:id="img_8" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-										<Image url="@./../ressources/img/mms.jpg" />
-									</image>
 									<VBox.margin>
 										<Insets top="5.0" />
 									</VBox.margin>
@@ -262,6 +261,9 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
 						</VBox>
@@ -269,14 +271,10 @@
 				</VBox>
 				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" styleClass="VBox_1">
 					<children>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
-								<ImageView fx:id="img_3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-										<Image url="@./../ressources/img/mms.jpg" />
-									</image>
-								</ImageView>
+								<ImageView fx:id="img_3" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
                         <Pane prefHeight="200.0" prefWidth="200.0" />
 								<HBox alignment="CENTER" maxHeight="35.0" prefHeight="100.0" prefWidth="200.0">
 									<children>
@@ -303,16 +301,16 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
 						</VBox>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="336.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="336.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
 								<ImageView fx:id="img_6" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="ALWAYS">
-									<image>
-										<Image url="@./../img/mars.png" />
-									</image>
 									<VBox.margin>
 										<Insets top="5.0" />
 									</VBox.margin>
@@ -343,16 +341,16 @@
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
 						</VBox>
-						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0">
+						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
                         <Pane prefHeight="200.0" prefWidth="200.0" />
 								<ImageView fx:id="img_9" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-									<image>
-										<Image url="@./../ressources/img/mms.jpg" />
-									</image>
 									<VBox.margin>
 										<Insets top="5.0" />
 									</VBox.margin>
@@ -383,17 +381,19 @@
                            <VBox.margin>
                               <Insets top="5.0" />
                            </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" />
+                           </padding>
 								</HBox>
 							</children>
                      <VBox.margin>
-                        <Insets top="5.0" />
+                        <Insets />
                      </VBox.margin>
 						</VBox>
 					</children>
 				</VBox>
-				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="256.0" styleClass="VBox_2">
+				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="256.0" styleClass="VBox">
 					<children>
-                  <ProgressIndicator fx:id="progress" progress="0.0" />
 						<!-- <ProgressIndicator id="progress" fx:id="progress"
 							progress="0.0" radius="15.0">
 							<effect>
@@ -404,7 +404,7 @@
 								</Lighting>
 							</effect>
 						</ProgressIndicator> -->
-						<TextField id="order_field" fx:id="order_field">
+						<TextField id="order_field" fx:id="order_field" editable="false">
 							<VBox.margin>
 								<Insets bottom="30.0" left="20.0" right="20.0" top="75.0" />
 							</VBox.margin>

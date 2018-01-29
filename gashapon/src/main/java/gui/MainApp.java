@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,7 +23,8 @@ public class MainApp extends Application {
             // Load the root layout from the fxml file
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Main.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
-			Scene scene = new Scene(page);	        
+			Scene scene = new Scene(page);
+			primaryStage.getIcons().add(new Image("@./../img/logo.jpg"));
 			primaryStage.setScene(scene);
 			primaryStage.show();
         } catch (IOException e) {
