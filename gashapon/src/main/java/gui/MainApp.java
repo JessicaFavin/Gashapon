@@ -24,7 +24,7 @@ public class MainApp extends Application {
             FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("Main.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
 			Scene scene = new Scene(page);
-			primaryStage.getIcons().add(new Image("@./../img/logo.jpg"));
+			primaryStage.getIcons().add(new Image("@./../img/logo.png"));
 			primaryStage.setScene(scene);
 			primaryStage.show();
         } catch (IOException e) {
