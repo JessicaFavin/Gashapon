@@ -44,10 +44,18 @@ public class FullState implements State {
 
 	@Override
 	public void payOrder(double moneyInserted) throws SoldOutException, NoChangeException {
+		//has to make sure user has the exact right amount of money
+		//-> needs to warn the client 
+		//Then take all the money except if bigger than what is owed
+		
 		//checks if inserted good money
 		if(moneyInserted>0) {
-			this.vendingMachine.insertMoney(moneyInserted);
-		}	
+			if(moneyInserted > this.vendingMachine.getAmountToPay()) {
+				throw new NoChangeException();
+			} else {
+				this.vendingMachine.insertMoney(moneyInserted);
+			}
+		}
 	}
 
 	@Override

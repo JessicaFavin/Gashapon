@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 import exception.InitException;
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
@@ -357,11 +358,14 @@ public class MainController implements Initializable {
 		payment += coin;
 		try {
 			this.vendingMachine.statePayOrder(coin);
+			checkPayment();
 		} catch (SoldOutException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoChangeException e) {
+			payment -= coin;
+			change_field.setText("No change available");
 			e.printStackTrace();
 		}
-		checkPayment();
 	}
 
 	private void checkPayment() {
@@ -370,7 +374,6 @@ public class MainController implements Initializable {
 				change = payment - price;
 				change_field.setText("in: " + change + " €");
 			} else {
-				//this.vendingMachine.noWaitingForPayment();
 				giveChange();
 			}
 		} else {
