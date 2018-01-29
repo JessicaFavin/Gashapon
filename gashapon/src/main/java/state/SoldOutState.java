@@ -1,5 +1,6 @@
 package state;
 
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.RestockNotNeededException;
 import exception.SoldOutException;
@@ -27,7 +28,7 @@ public class SoldOutState implements State {
 	}
 
 	@Override
-	public void payOrder(double moneyInserted) throws SoldOutException {
+	public void payOrder(double moneyInserted) throws SoldOutException, NoChangeException {
 		throw new SoldOutException();
 		
 	}

@@ -2,6 +2,7 @@ package state;
 
 import vendingMachine.Product;
 import vendingMachine.VendingMachine;
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
@@ -42,7 +43,7 @@ public class FullState implements State {
 	}
 
 	@Override
-	public void payOrder(double moneyInserted) throws SoldOutException {
+	public void payOrder(double moneyInserted) throws SoldOutException, NoChangeException {
 		//checks if inserted good money
 		if(moneyInserted>0) {
 			this.vendingMachine.insertMoney(moneyInserted);

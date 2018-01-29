@@ -7,6 +7,7 @@ import java.util.Map;
 
 import exception.SoldOutException;
 import exception.InitException;
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
@@ -103,7 +104,7 @@ public class VendingMachine {
 		}
 	}
 
-	public void statePayOrder(double moneyInserted) throws SoldOutException {
+	public void statePayOrder(double moneyInserted) throws SoldOutException, NoChangeException {
 		System.out.println("VendingMachine - statePayOrder - waitingForPayement = " + this.waitingForPayement);
 		System.out.println("VendingMachine - statePayOrder - machineState = " + this.machineState);
 		this.machineState.payOrder(moneyInserted);
@@ -267,19 +268,11 @@ public class VendingMachine {
 	}
 
 	public Product getProduct(int id) {
-		for(int i=0 ; i < products.size() ; i++) {
-			if(products.get(i).isSame(id)) {
-				return products.get(i);
+		for(int i=0 ; i < this.products.size() ; i++) {
+			if(this.products.get(i).isSame(id)) {
+				return this.products.get(i);
 			}
 		}
-		/*
-		for(Product product : this.products) {
-			if(product.isSame(id)) {
-				return product;
-			}
-		}
-		*/
-
 		return null;
 	}
 
@@ -306,13 +299,13 @@ public class VendingMachine {
 			content += product.getName() + " (" + product.getId() + ") has " + product.getQuantity() + " left\n";
 		}
 
-		content += "Cash = " + cashRegister + "\n";
+		content += "Cash = " + this.cashRegister + "\n";
 
 		return content;
 	}
 
 	public double getCash() {
-		return cashRegister;
+		return this.cashRegister;
 	}
 
 	public void noWaitingForPayment() {
@@ -321,7 +314,7 @@ public class VendingMachine {
 	
 	public void checkMachineState() {
 		boolean full = true;
-		for(Product product : products) {
+		for(Product product : this.products) {
 			if(product.isEmpty()) {
 				changeState(this.soldOutState);
 				return;
@@ -341,6 +334,10 @@ public class VendingMachine {
 		}
 		
 		changeState(this.hasChangeState);
+	}
+	
+	public double getAmountToPay() {
+		return this.amountToPay;
 	}
 
 }

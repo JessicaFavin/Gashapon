@@ -1,5 +1,6 @@
 package state;
 
+import exception.NoChangeException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
@@ -38,7 +39,7 @@ public class HasChangeState implements State {
 		this.vendingMachine.orderComplete();
 	}
 
-	public void payOrder(double moneyInserted) throws SoldOutException {
+	public void payOrder(double moneyInserted) throws SoldOutException, NoChangeException {
 		//checks if inserted good money
 		if(moneyInserted>0) {
 			this.vendingMachine.insertMoney(moneyInserted);
