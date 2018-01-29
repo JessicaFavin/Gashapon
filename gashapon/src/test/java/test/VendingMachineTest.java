@@ -17,6 +17,8 @@ import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.SoldOutException;
 import state.FullState;
+import state.HasChangeState;
+import state.NoChangeState;
 import state.SoldOutState;
 import vendingMachine.Product;
 import vendingMachine.VendingMachine;
@@ -179,7 +181,7 @@ class VendingMachineTest {
 			this.machine.stateOrderComplete();
 			this.machine.statePayOrder(2);
 			this.machine.stateRetriveOrder();
-			
+
 			// get out of nochange state
 			this.machine.stateAddProduct(product.getId(), 1);
 			this.machine.stateOrderComplete();
@@ -395,11 +397,25 @@ class VendingMachineTest {
 	public void testNoChangeState() {
 		System.out.println("");
 		System.out.println("testNoChangeState");
+
 		// Arrange
-
+		ArrayList<Product> products = new ArrayList<Product>();
+		products.add(new Product(21,"coke.png","Coke"));
+		Product product = products.get(0);
 		// Act
-
+		try {
+			this.machine = new VendingMachine(products);
+			this.machine.stateAddProduct(product.getId(), 1);
+			this.machine.stateOrderComplete();
+			this.machine.statePayOrder(21);
+			this.machine.stateRetriveOrder();
+		} catch (InitException | NotEnoughProductException | SoldOutException | ProductDoesNotExistException | NoChangeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// Assert
+		System.out.println("state = " + this.machine.getMachineState());
+		assertTrue(this.machine.getMachineState().getClass() == NoChangeState.class);
 	}
 
 	@Test
@@ -407,10 +423,23 @@ class VendingMachineTest {
 		System.out.println("");
 		System.out.println("testHasCHangeState");
 		// Arrange
-
-		// Act
-
-		// Assert
+				ArrayList<Product> products = new ArrayList<Product>();
+				products.add(new Product(15,"coke.png","Coke"));
+				Product product = products.get(0);
+				// Act
+				try {
+					this.machine = new VendingMachine(products);
+					this.machine.stateAddProduct(product.getId(), 1);
+					this.machine.stateOrderComplete();
+					this.machine.statePayOrder(15);
+					this.machine.stateRetriveOrder();
+				} catch (InitException | NotEnoughProductException | SoldOutException | ProductDoesNotExistException | NoChangeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				// Assert
+				System.out.println("state = " + this.machine.getMachineState());
+				assertTrue(this.machine.getMachineState().getClass() == HasChangeState.class);
 	}
 
 }

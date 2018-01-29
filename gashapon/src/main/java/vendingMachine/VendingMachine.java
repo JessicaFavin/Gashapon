@@ -237,7 +237,7 @@ public class VendingMachine {
 	}
 
 	public boolean hasChange() {
-		return (this.cashRegister>15 && this.cashRegister%7==0);
+		return !(this.cashRegister>15 && this.cashRegister%7==0);
 	}
 
 	private void initProducts(List<Product> products) throws InitException {
