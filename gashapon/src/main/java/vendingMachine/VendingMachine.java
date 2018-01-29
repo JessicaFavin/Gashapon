@@ -89,6 +89,10 @@ public class VendingMachine {
 			} else {
 				this.order.put(productId, this.order.get(productId)+productQuantity);
 			}
+			// check quantity
+			if(this.order.get(productId) > getProduct(productId).getQuantity()) {
+				throw new NotEnoughProductException();
+			}
 			//add price of products added
 			this.amountToPay += productToAdd.getPrice()*productQuantity;
 			this.price = this.amountToPay;

@@ -19,7 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
@@ -101,7 +100,7 @@ public class MainController implements Initializable {
 	private static String order = "";
 	private static boolean gaveChange = false;
 	private static boolean paymentPhase = false;
-	
+
 	private ArrayList<Product> products = new ArrayList<Product>();
 
 	@Override
@@ -125,7 +124,7 @@ public class MainController implements Initializable {
 			System.err.println("Initialize - The products array does not contain enough products (9)");
 		}
 
-		initView(products);
+		initView();
 		initOrderButtonAction();
 		initCoinButton();
 
@@ -135,9 +134,9 @@ public class MainController implements Initializable {
 		System.out.println(vendingMachine.printContent());
 	}
 
-	private void initView(ArrayList<Product> products) {
+	private void initView() {
 
-		Iterator<Product> itr = products.iterator();
+		Iterator<Product> itr = this.products.iterator();
 
 		if (itr.hasNext()) {
 			setProduct(itr.next(), price_1, id_1, img_1);
@@ -178,7 +177,7 @@ public class MainController implements Initializable {
 
 	private void setProduct(Product product, Label price, Label id, ImageView img) {
 		String path = "@./../img/";
-		
+
 		price.setText(product.getPrice() + " €");
 		id.setText("" + product.getId());
 		img.setImage(new Image(path + product.getImg()));
@@ -188,7 +187,7 @@ public class MainController implements Initializable {
 		button_1.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				buttonAction("1");
-				}
+			}
 		});
 
 		button_2.setOnAction(new EventHandler<ActionEvent>() {
@@ -259,7 +258,7 @@ public class MainController implements Initializable {
 					} catch(NotEnoughProductException ne) {
 						System.err.println("Button V Action - The product is not available. productId = " + order_field.getText());
 						change_field.setText("Product not available.");
-						
+
 					} catch (SoldOutException se) {
 						System.err.println("Button V Action - At leat one product has been sold out. productId = " + order_field.getText());
 					} catch (ProductDoesNotExistException pe) {
@@ -293,6 +292,7 @@ public class MainController implements Initializable {
 				gaveChange = false;
 				try {
 					vendingMachine.stateCancelOrder();
+					vendingMachine.noWaitingForPayment();
 				} catch (SoldOutException e1) {
 					System.err.println("Button C Action - At least one product is sold out.");
 					e1.printStackTrace();
@@ -397,7 +397,7 @@ public class MainController implements Initializable {
 		gaveChange = true;
 		paymentPhase = false;
 		order = "";
-		
+
 		System.out.println(vendingMachine.printContent());
 		restockMachine();
 	}
@@ -411,8 +411,8 @@ public class MainController implements Initializable {
 				progress.setVisible(true);
 				//Thread.sleep(1000);
 				change_field.setText("");
-				order_field.setText("Restocking ...");
-				//Thread.sleep(1000);
+				order_field.setText("Refilling ...");
+				//Thread.sleep(5000);
 				//TimeUnit.SECONDS.sleep(1);
 				progress.setProgress(0.5);
 				//TimeUnit.SECONDS.sleep(1);
@@ -426,68 +426,57 @@ public class MainController implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} 
-			
+
 			progress.setVisible(false);
 			order_field.setText("");
 			System.out.println("MainController - restockMachine - end");
 		}
 	}
-	
+
 	private void setImageSoldOut() {
-		
-		for(Product p : products) {
-			if(p.getQuantity() == 0) {
-				switch(p.getId()) {
-					case 1:
-						img_1.setEffect(new GaussianBlur());
-						id_1.setEffect(new GaussianBlur());
-						price_1.setEffect(new GaussianBlur());
-						break;
-					case 2:
-						img_2.setEffect(new GaussianBlur());
-						id_2.setEffect(new GaussianBlur());
-						price_2.setEffect(new GaussianBlur());
-						break;
-					case 3:
-						img_3.setEffect(new GaussianBlur());
-						id_3.setEffect(new GaussianBlur());
-						price_3.setEffect(new GaussianBlur());
-						break;
-					case 4:
-						img_4.setEffect(new GaussianBlur());
-						id_4.setEffect(new GaussianBlur());
-						price_4.setEffect(new GaussianBlur());
-						break;
-					case 5:
-						img_5.setEffect(new GaussianBlur());
-						id_5.setEffect(new GaussianBlur());
-						price_5.setEffect(new GaussianBlur());
-						break;
-					case 6:
-						img_6.setEffect(new GaussianBlur());
-						id_6.setEffect(new GaussianBlur());
-						price_6.setEffect(new GaussianBlur());
-						break;
-					case 7:
-						img_7.setEffect(new GaussianBlur());
-						id_7.setEffect(new GaussianBlur());
-						price_7.setEffect(new GaussianBlur());
-						break;
-					case 8:
-						img_8.setEffect(new GaussianBlur());
-						id_8.setEffect(new GaussianBlur());
-						price_8.setEffect(new GaussianBlur());
-						break;
-					case 9:
-						img_9.setEffect(new GaussianBlur());
-						id_9.setEffect(new GaussianBlur());
-						price_9.setEffect(new GaussianBlur());
-						break;
-					default:
-						System.out.println("No case Found for blurring image");						
-				}	
-			}
-			
+
+		Iterator<Product> itr = this.products.iterator();
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_1, id_1, img_1);
 		}
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_2, id_2, img_2);
+		}
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_3, id_3, img_3);
+		}
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_3, id_4, img_4);
+		}
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_5, id_5, img_5);
+		}
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_6, id_6, img_6);
+		}
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_7, id_7, img_7);
+		}
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_8, id_8, img_8);
+		}
+
+		if (itr.hasNext()) {
+			setImgBlur(itr.next(), price_9, id_9, img_9);
+		}
+	}
+	
+	private void setImgBlur(Product product, Label price, Label id, ImageView img) {
+		img.setEffect(new GaussianBlur());
+		id.setEffect(new GaussianBlur());
+		price.setEffect(new GaussianBlur());
 	}
 }
