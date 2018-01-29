@@ -405,6 +405,7 @@ public class MainController implements Initializable {
 	private void restockMachine() {
 		if(this.vendingMachine.getMachineState().getClass() == SoldOutState.class) {			
 			System.out.println("MainController - restockMachine");
+			setImageSoldOut();
 			try {
 				//TimeUnit.SECONDS.sleep(1);
 				progress.setProgress(1);
@@ -412,6 +413,9 @@ public class MainController implements Initializable {
 				//Thread.sleep(1000);
 				change_field.setText("");
 				order_field.setText("Refilling ...");
+				if(true) {
+					return;
+				}
 				//Thread.sleep(5000);
 				//TimeUnit.SECONDS.sleep(1);
 				progress.setProgress(0.5);
@@ -473,10 +477,12 @@ public class MainController implements Initializable {
 			setImgBlur(itr.next(), price_9, id_9, img_9);
 		}
 	}
-	
+
 	private void setImgBlur(Product product, Label price, Label id, ImageView img) {
-		img.setEffect(new GaussianBlur());
-		id.setEffect(new GaussianBlur());
-		price.setEffect(new GaussianBlur());
+		if(product.getQuantity() == 0) {
+			img.setEffect(new GaussianBlur());
+			id.setEffect(new GaussianBlur());
+			price.setEffect(new GaussianBlur());
+		}
 	}
 }
