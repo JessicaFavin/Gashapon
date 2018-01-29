@@ -273,6 +273,9 @@ public class MainController implements Initializable {
 						System.err.println("Button V Action - At leat one product has been sold out. productId = " + order_field.getText());
 					} catch (ProductDoesNotExistException pe) {
 						System.err.println("Button V Action - The product does not exist. productId = " + order_field.getText());
+						change_field.setAlignment(Pos.BASELINE_LEFT);
+						change_field.setText("Product not available.");
+						change_field.setAlignment(Pos.CENTER);
 					}catch (Exception ex) {
 						ex.printStackTrace();
 						System.err.println("Button V Action - Error in validation. productId = " + order_field.getText());
