@@ -64,14 +64,12 @@ public class VendingMachine {
 	}
 
 	public void addCash(double cashAdded){
-		System.out.println("VendingMachine - addCash - cashAdded = " + cashAdded);
 		if(cashAdded>0){
 			this.cashRegister += cashAdded;
 		}
 	}
 
 	public void giveCash(double cashReturned){
-		System.out.println("VendingMachine - giveCash - cashReturned = " + cashReturned);
 		if (cashReturned<=cashRegister){
 			this.cashRegister -= cashReturned;
 		}
@@ -81,7 +79,6 @@ public class VendingMachine {
 	 * Customer add product to order list
 	 */
 	public void addProduct(int productId, int productQuantity) throws NotEnoughProductException, ProductDoesNotExistException {
-		System.out.println("VendingMachine - addProduct - productId = " + productId);
 		Product productToAdd = this.getProduct(productId);
 		if(productToAdd == null)
 			throw new ProductDoesNotExistException();
@@ -131,10 +128,8 @@ public class VendingMachine {
 	}
 
 	public void insertMoney(double moneyInserted) {
-		System.out.println("VendingMachine - insertMoney - moneyInserted = " + moneyInserted);
 		this.amountToPay -= moneyInserted;
 		addCash(moneyInserted);
-		System.out.println("VendingMachine - insertMoney - amountToPay = " + this.amountToPay);
 		if(this.amountToPay <= 0) {
 			this.waitingForPayement = false;
 		}
@@ -164,16 +159,13 @@ public class VendingMachine {
 	}
 
 	public void retrieveOrder() {
-		System.out.println("VendingMachine - retrieveOrder");
 		// take products
 		for (Map.Entry<Integer, Integer> entry : order.entrySet()) {
 			Integer id = entry.getKey();
 			Integer quantity = entry.getValue();
-			System.out.println("VendingMachine - retrieveOrder - id = " + id + " quantity = " + quantity);
 			getProduct(id).buyProduct(quantity);
 		}
 		this.order.clear();
-		// TODO: test
 		this.changeToGiveBack = 0;
 		if(this.amountToPay<0) {
 			this.changeToGiveBack = -1*this.amountToPay;
@@ -191,7 +183,6 @@ public class VendingMachine {
 	}
 
 	public void cancelOrder() {
-		System.out.println("VendingMachine - cancelOrder");
 		giveCash(price-amountToPay);
 		this.order.clear();
 		this.amountToPay = 0;

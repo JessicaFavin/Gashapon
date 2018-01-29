@@ -410,11 +410,9 @@ class VendingMachineTest {
 			this.machine.statePayOrder(21);
 			this.machine.stateRetriveOrder();
 		} catch (InitException | NotEnoughProductException | SoldOutException | ProductDoesNotExistException | NoChangeException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// Assert
-		System.out.println("state = " + this.machine.getMachineState());
 		assertTrue(this.machine.getMachineState().getClass() == NoChangeState.class);
 	}
 
@@ -423,23 +421,21 @@ class VendingMachineTest {
 		System.out.println("");
 		System.out.println("testHasCHangeState");
 		// Arrange
-				ArrayList<Product> products = new ArrayList<Product>();
-				products.add(new Product(15,"coke.png","Coke"));
-				Product product = products.get(0);
-				// Act
-				try {
-					this.machine = new VendingMachine(products);
-					this.machine.stateAddProduct(product.getId(), 1);
-					this.machine.stateOrderComplete();
-					this.machine.statePayOrder(15);
-					this.machine.stateRetriveOrder();
-				} catch (InitException | NotEnoughProductException | SoldOutException | ProductDoesNotExistException | NoChangeException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				// Assert
-				System.out.println("state = " + this.machine.getMachineState());
-				assertTrue(this.machine.getMachineState().getClass() == HasChangeState.class);
+		ArrayList<Product> products = new ArrayList<Product>();
+		products.add(new Product(15,"coke.png","Coke"));
+		Product product = products.get(0);
+		// Act
+		try {
+			this.machine = new VendingMachine(products);
+			this.machine.stateAddProduct(product.getId(), 1);
+			this.machine.stateOrderComplete();
+			this.machine.statePayOrder(15);
+			this.machine.stateRetriveOrder();
+		} catch (InitException | NotEnoughProductException | SoldOutException | ProductDoesNotExistException | NoChangeException e) {
+			e.printStackTrace();
+		}
+		// Assert
+		assertTrue(this.machine.getMachineState().getClass() == HasChangeState.class);
 	}
 
 }
