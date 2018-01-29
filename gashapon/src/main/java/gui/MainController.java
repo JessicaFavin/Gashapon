@@ -1,22 +1,22 @@
 package gui;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 import java.util.ResourceBundle;
-import java.util.concurrent.TimeUnit;
-
 import exception.InitException;
 import exception.NotEnoughProductException;
 import exception.ProductDoesNotExistException;
 import exception.RestockNotNeededException;
 import exception.SoldOutException;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 import state.SoldOutState;
 import vendingMachine.Product;
 import vendingMachine.VendingMachine;
@@ -106,8 +107,6 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-
 		// create products
 		products.add(new Product(2,"coke.png","Coke"));
 		products.add(new Product(2.5 ,"sprite.png","Sprite"));
@@ -131,6 +130,9 @@ public class MainController implements Initializable {
 
 		progress = new ProgressIndicator(1);
 		progress.setVisible(false);
+		
+		change_field.setAlignment(Pos.CENTER);
+		order_field.setAlignment(Pos.CENTER);
 
 		System.out.println(vendingMachine.printContent());
 	}
@@ -358,7 +360,7 @@ public class MainController implements Initializable {
 		try {
 			this.vendingMachine.statePayOrder(coin);
 		} catch (SoldOutException e) {
-			// TODO Auto-generated catch block
+			System.err.println("coinAction - At least one product is missing.");
 			e.printStackTrace();
 		}
 		checkPayment();
@@ -370,7 +372,6 @@ public class MainController implements Initializable {
 				change = payment - price;
 				change_field.setText("in: " + change + " €");
 			} else {
-				//this.vendingMachine.noWaitingForPayment();
 				giveChange();
 			}
 		} else {
@@ -382,16 +383,14 @@ public class MainController implements Initializable {
 		try {
 			this.vendingMachine.stateRetriveOrder();
 			change = payment - price;
-			//this.vendingMachine.getChangeToGiveBack();
 		} catch (SoldOutException e) {
-			System.err.println("GiveCHange - At least one product is sold out.");
+			System.err.println("giveChange - At least one product is sold out.");
 			setImageSoldOut();
 			e.printStackTrace();
 		}
 
 		change_field.setText("give " + change + " €");
 		order_field.setText("");
-		//change_field.setText("");
 		price = 0;
 		payment = 0;
 		change = 0;
@@ -407,34 +406,72 @@ public class MainController implements Initializable {
 		if(this.vendingMachine.getMachineState().getClass() == SoldOutState.class) {			
 			System.out.println("MainController - restockMachine");
 			setImageSoldOut();
-			try {
-				//TimeUnit.SECONDS.sleep(1);
-				progress.setProgress(1);
-				progress.setVisible(true);
-				//Thread.sleep(1000);
-				change_field.setText("");
-				order_field.setText("Refilling ...");
-				if(true) {
-					return;
-				}
-				//Thread.sleep(5000);
-				//TimeUnit.SECONDS.sleep(1);
-				progress.setProgress(0.5);
-				//TimeUnit.SECONDS.sleep(1);
-				progress.setProgress(0);
-				//TimeUnit.SECONDS.sleep(1);
-				this.vendingMachine.stateRestockMachine();
-			} catch (RestockNotNeededException e) {
-				// TODO Auto-generated catch block
-				System.err.println("No need to restock");
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
+			int sec = 0;
+			Timeline timeline = new Timeline();
+			KeyFrame showProgress = new KeyFrame(
+					Duration.seconds(sec++),
+					new EventHandler<ActionEvent>() {
 
-			progress.setVisible(false);
-			order_field.setText("");
-			System.out.println("MainController - restockMachine - end");
+						public void handle(ActionEvent event) {
+
+							progress.setProgress(1);
+							progress.setVisible(true);
+
+						}
+					});
+			KeyFrame refilling = new KeyFrame(
+					Duration.seconds(sec++),
+					new EventHandler<ActionEvent>() {
+
+						public void handle(ActionEvent event) {
+
+							order_field.setText("Refilling ...");
+
+						}
+					});
+			KeyFrame progressHalf = new KeyFrame(
+					Duration.seconds(sec+=2),
+					new EventHandler<ActionEvent>() {
+
+						public void handle(ActionEvent event) {
+
+							progress.setProgress(0.5);
+
+						}
+					});
+			KeyFrame progressFull = new KeyFrame(
+					Duration.seconds(sec++),
+					new EventHandler<ActionEvent>() {
+
+						public void handle(ActionEvent event) {
+
+							progress.setProgress(1);
+
+						}
+					});
+			KeyFrame fillingEnd = new KeyFrame(
+					Duration.seconds(sec++),
+					new EventHandler<ActionEvent>() {
+
+						public void handle(ActionEvent event) {
+
+							try {
+								vendingMachine.stateRestockMachine();
+							} catch (RestockNotNeededException e) {
+								System.err.println("No need to restock");
+							}
+							progress.setVisible(false);
+							order_field.setText("");
+							initView();
+
+						}
+					});
+			timeline.getKeyFrames().add(showProgress);
+			timeline.getKeyFrames().add(refilling);
+			timeline.getKeyFrames().add(progressHalf);
+			timeline.getKeyFrames().add(progressFull);
+			timeline.getKeyFrames().add(fillingEnd);
+			timeline.play();
 		}
 	}
 
