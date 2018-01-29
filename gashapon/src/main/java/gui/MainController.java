@@ -95,9 +95,6 @@ public class MainController implements Initializable {
 	@FXML private Button coin_10;
 	@FXML private Button coin_20;
 
-	// Progress indicator
-	@FXML private ProgressIndicator progress;
-
 	private VendingMachine vendingMachine;
 	private static double payment = 0;
 	private static double price;
@@ -132,9 +129,6 @@ public class MainController implements Initializable {
 		initView();
 		initOrderButtonAction();
 		initCoinButton();
-
-		progress = new ProgressIndicator(1);
-		progress.setVisible(false);
 		
 		change_field.setAlignment(Pos.CENTER);
 		order_field.setAlignment(Pos.CENTER);
@@ -422,19 +416,8 @@ public class MainController implements Initializable {
 			setImageSoldOut();
 			int sec = 0;
 			Timeline timeline = new Timeline();
-			KeyFrame showProgress = new KeyFrame(
-					Duration.seconds(sec++),
-					new EventHandler<ActionEvent>() {
-
-						public void handle(ActionEvent event) {
-
-							progress.setProgress(1);
-							progress.setVisible(true);
-
-						}
-					});
 			KeyFrame refilling = new KeyFrame(
-					Duration.seconds(sec++),
+					Duration.seconds(sec+=2),
 					new EventHandler<ActionEvent>() {
 
 						public void handle(ActionEvent event) {
@@ -443,28 +426,8 @@ public class MainController implements Initializable {
 
 						}
 					});
-			KeyFrame progressHalf = new KeyFrame(
-					Duration.seconds(sec+=2),
-					new EventHandler<ActionEvent>() {
-
-						public void handle(ActionEvent event) {
-
-							progress.setProgress(0.5);
-
-						}
-					});
-			KeyFrame progressFull = new KeyFrame(
-					Duration.seconds(sec++),
-					new EventHandler<ActionEvent>() {
-
-						public void handle(ActionEvent event) {
-
-							progress.setProgress(0);
-
-						}
-					});
 			KeyFrame fillingEnd = new KeyFrame(
-					Duration.seconds(sec++),
+					Duration.seconds(sec+=4),
 					new EventHandler<ActionEvent>() {
 
 						public void handle(ActionEvent event) {
@@ -474,15 +437,12 @@ public class MainController implements Initializable {
 							} catch (RestockNotNeededException e) {
 								System.err.println("No need to restock");
 							}
-							progress.setVisible(false);
 							order_field.setText("");
+							change_field.setText("");
 							removeAllEffect();
 						}
 					});
-			timeline.getKeyFrames().add(showProgress);
 			timeline.getKeyFrames().add(refilling);
-			timeline.getKeyFrames().add(progressHalf);
-			timeline.getKeyFrames().add(progressFull);
 			timeline.getKeyFrames().add(fillingEnd);
 			timeline.play();
 		}
