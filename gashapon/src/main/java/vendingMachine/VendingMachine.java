@@ -328,12 +328,12 @@ public class VendingMachine {
 			return;
 		}
 		
-		if(this.cashRegister == 0) {
-			changeState(this.noChangeState);
+		if(hasChange()) {
+			changeState(this.hasChangeState);
 			return;
 		}
 		
-		changeState(this.hasChangeState);
+		changeState(this.noChangeState);
 	}
 	
 	public double getAmountToPay() {
