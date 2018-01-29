@@ -28,7 +28,6 @@ public class FullState implements State {
 					//throws exception to be handled by the controller
 					throw new NotEnoughProductException();
 				} catch (ProductDoesNotExistException e) {
-					// TODO Auto-generated catch block
 					throw new ProductDoesNotExistException();
 				}
 			} else {
