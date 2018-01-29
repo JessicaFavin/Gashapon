@@ -29,27 +29,20 @@ public class HasChangeState implements State {
 					}
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	}
 
 	public void orderComplete() throws SoldOutException {
-		//checks if not in the paying phase
-		//if(!this.vendingMachine.getWaitingForPayement()) {
-			this.vendingMachine.orderComplete();
-		//}		
+		this.vendingMachine.orderComplete();
 	}
 
 	public void payOrder(double moneyInserted) throws SoldOutException {
-		//checks if not in the paying phase
-		//if(this.vendingMachine.getWaitingForPayement()) {
-			//checks if inserted good money
-			if(moneyInserted>0) {
-				this.vendingMachine.insertMoney(moneyInserted);
-			}
-		//}		
+		//checks if inserted good money
+		if(moneyInserted>0) {
+			this.vendingMachine.insertMoney(moneyInserted);
+		}	
 	}
 
 	public void retrieveOrder() throws SoldOutException {
@@ -73,14 +66,11 @@ public class HasChangeState implements State {
 	}
 
 	public void cancelOrder() throws SoldOutException {
-		//checks if not in the paying phase
-		//if(!this.vendingMachine.getWaitingForPayement()) {
-			this.vendingMachine.cancelOrder();
-		//}
+		this.vendingMachine.cancelOrder();
 	}
 
 	public void callRestockTeam() throws RestockNotNeededException {
-		// TODO Auto-generated method stub
+		throw new RestockNotNeededException();
 		
 	}
 

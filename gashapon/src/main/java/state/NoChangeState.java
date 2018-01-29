@@ -35,10 +35,7 @@ public class NoChangeState implements State {
 
 	@Override
 	public void orderComplete() throws SoldOutException {
-		//checks if not in the paying phase
-		//if(!this.vendingMachine.getWaitingForPayement()) {
-			this.vendingMachine.orderComplete();
-		//}		
+		this.vendingMachine.orderComplete();
 	}
 
 	@Override
@@ -46,13 +43,10 @@ public class NoChangeState implements State {
 		// TODO
 		//has to make sure user has the exact right amount of money
 		
-		//checks if not in the paying phase
-		//if(this.vendingMachine.getWaitingForPayement()) {
-			//checks if inserted good money
-			if(moneyInserted>0) {
-				this.vendingMachine.insertMoney(moneyInserted);
-			}
-		//}		
+		//checks if inserted good money
+		if(moneyInserted>0) {
+			this.vendingMachine.insertMoney(moneyInserted);
+		}	
 		
 	}
 
@@ -79,15 +73,12 @@ public class NoChangeState implements State {
 
 	@Override
 	public void cancelOrder() throws SoldOutException {
-		//checks if not in the paying phase
-		//if(!this.vendingMachine.getWaitingForPayement()) {
-			this.vendingMachine.cancelOrder();
-		//}
+		this.vendingMachine.cancelOrder();
 	}
 
 	@Override
 	public void callRestockTeam() throws RestockNotNeededException {
-		// TODO Auto-generated method stub
+		throw new RestockNotNeededException();
 		
 	}
 

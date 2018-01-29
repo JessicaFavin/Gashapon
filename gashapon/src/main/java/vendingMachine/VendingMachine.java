@@ -202,41 +202,11 @@ public class VendingMachine {
 				products.get(i).putBackProduct(quantity.intValue());
 			}
 		}
-		/*
-		for(int i=0; i<VendingMachine.productsCapacity; i++) {
-			Integer productQuantity = this.order.get(i);
-			int productId = i;
-			if(productQuantity != null) {
-				Product product = this.products.get(productId);
-				product.putBackProduct(productQuantity.intValue());
-			}
-		}
-		*/
 	}
 
 	public void stateCancelOrder() throws SoldOutException {
 		this.machineState.cancelOrder();
 	}
-
-	/*
-    public void restockMachine(ArrayList<Product> products) {
-    	boolean filled = false;
-    	for(Product p: products) {
-    		filled = false;
-    		for(int i=0 ; i < this.products.size() ; i++) {
-    			if(p.isSame(this.products.get(i))) {
-    				this.products.get(i).restockProduct(p.getQuantity());
-    				filled = true;
-    				break;
-    			}
-    		}
-    		if(!filled) {
-    			this.products.add(p);
-    		}
-    	}
-    }
-	 */
-
 
 	private void initStates() {
 		this.fullState = new FullState(this);
