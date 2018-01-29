@@ -153,7 +153,7 @@ public class MainController implements Initializable {
 		}
 
 		if (itr.hasNext()) {
-			setProduct(itr.next(), price_3, id_4, img_4);
+			setProduct(itr.next(), price_4, id_4, img_4);
 		}
 
 		if (itr.hasNext()) {
@@ -465,7 +465,7 @@ public class MainController implements Initializable {
 		}
 
 		if (itr.hasNext()) {
-			setImgBlur(itr.next(), price_3, id_4, img_4);
+			setImgBlur(itr.next(), price_4, id_4, img_4);
 		}
 
 		if (itr.hasNext()) {

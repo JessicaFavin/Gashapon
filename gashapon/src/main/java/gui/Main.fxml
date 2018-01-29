@@ -24,9 +24,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
-	<children>
-		<HBox id="root" alignment="CENTER" stylesheets="@Main.css">
+<BorderPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
+   <center>
+		<HBox id="root" alignment="CENTER" prefHeight="806.0" prefWidth="1021.0" stylesheets="@Main.css" BorderPane.alignment="CENTER">
 			<children>
 				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" HBox.hgrow="ALWAYS">
 					<children>
@@ -149,7 +149,7 @@
 						</VBox>
 					</children>
 				</VBox>
-				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" styleClass="VBox_1">
+				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" styleClass="VBox_1" HBox.hgrow="ALWAYS">
 					<children>
 						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
@@ -269,7 +269,7 @@
 						</VBox>
 					</children>
 				</VBox>
-				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" styleClass="VBox_1">
+				<VBox alignment="CENTER" prefHeight="674.0" prefWidth="342.0" styleClass="VBox_1" HBox.hgrow="ALWAYS">
 					<children>
 						<VBox alignment="BASELINE_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="Box">
 							<children>
@@ -396,14 +396,14 @@
 					<children>
 						<!-- <ProgressIndicator id="progress" fx:id="progress"
 							progress="0.0" radius="15.0">
-							<effect>
-								<Lighting bumpInput="$null">
-									<light>
-										<Light.Distant />
-									</light>
-								</Lighting>
-							</effect>
-						</ProgressIndicator> -->
+      							<effect>
+      								<Lighting bumpInput="$null">
+      									<light>
+      										<Light.Distant />
+      									</light>
+      								</Lighting>
+      							</effect>
+      						</ProgressIndicator> -->
 						<TextField id="order_field" fx:id="order_field" editable="false">
 							<VBox.margin>
 								<Insets bottom="30.0" left="20.0" right="20.0" top="75.0" />
@@ -541,5 +541,5 @@
 				</VBox>
 			</children>
 		</HBox>
-	</children>
-</AnchorPane>
+   </center>
+</BorderPane>
