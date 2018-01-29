@@ -1,15 +1,12 @@
 package app;
 
 import java.net.URL;
-import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import vendingMachine.VendingMachine;
-import vendingMachine.Product;
 
 public class App extends Application {
 	

@@ -1,7 +1,9 @@
 package vendingMachine;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
+import java.util.Map;
 
 import exception.SoldOutException;
 import exception.InitException;
@@ -15,12 +17,12 @@ import state.SoldOutState;
 import state.State;
 
 public class VendingMachine {
-	public ArrayList<Product> products; 
+	public List<Product> products; 
 	public static final int productsCapacity = 9;
 	private double cashRegister;
 	private State machineState; 
 	private double amountToPay;
-	private HashMap<Integer, Integer> order;
+	private Map<Integer, Integer> order;
 	private boolean waitingForPayement;
 	private double changeToGiveBack;
 	private double price;
@@ -43,7 +45,7 @@ public class VendingMachine {
 		changeState(soldOutState);
 	}
 
-	public VendingMachine(ArrayList<Product> products) throws InitException {
+	public VendingMachine(List<Product> products) throws InitException {
 		initStates();
 		this.cashRegister = 0;
 		//if state is not full, it will be changed inside initProducts method 
@@ -163,7 +165,7 @@ public class VendingMachine {
 	public void retrieveOrder() {
 		System.out.println("VendingMachine - retrieveOrder");
 		// take products
-		for (HashMap.Entry<Integer, Integer> entry : order.entrySet()) {
+		for (Map.Entry<Integer, Integer> entry : order.entrySet()) {
 			Integer id = entry.getKey();
 			Integer quantity = entry.getValue();
 			System.out.println("VendingMachine - retrieveOrder - id = " + id + " quantity = " + quantity);
@@ -267,7 +269,7 @@ public class VendingMachine {
 		return (this.cashRegister>15 && this.cashRegister%7==0);
 	}
 
-	private void initProducts(ArrayList<Product> products) throws InitException {
+	private void initProducts(List<Product> products) throws InitException {
 		//if the list of products contains enough products to fill the machine
 		if(products.size() > 0) {
 			int i = 0;
@@ -290,7 +292,7 @@ public class VendingMachine {
 		}
 	}
 
-	public ArrayList<Product> getProducts(){
+	public List<Product> getProducts(){
 		return this.products;
 	}
 
@@ -311,7 +313,7 @@ public class VendingMachine {
 		return null;
 	}
 
-	public HashMap<Integer, Integer> getOrder() {
+	public Map<Integer, Integer> getOrder() {
 		return this.order;
 	}
 

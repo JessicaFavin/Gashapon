@@ -3,6 +3,7 @@ package gui;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
@@ -101,7 +102,7 @@ public class MainController implements Initializable {
 	private static boolean gaveChange = false;
 	private static boolean paymentPhase = false;
 
-	private ArrayList<Product> products = new ArrayList<Product>();
+	private List<Product> products = new ArrayList<Product>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
