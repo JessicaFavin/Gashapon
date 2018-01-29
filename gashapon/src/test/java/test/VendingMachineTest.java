@@ -1,7 +1,6 @@
 package test;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
@@ -67,7 +66,6 @@ class VendingMachineTest {
 		try {
 			this.machine = new VendingMachine(products);
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -101,8 +99,6 @@ class VendingMachineTest {
 
 	@Test
 	public void testBuyItemWithExactPrice() {
-		System.out.println("");
-		System.out.println("testBuyItemWithExactPrice");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -115,23 +111,17 @@ class VendingMachineTest {
 			this.machine.statePayOrder(2);
 			this.machine.stateRetriveOrder();
 		} catch (NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// Assert
-		System.out.println("testBuyItemWithExactPrice - cash = " + this.machine.getCash());
-		System.out.println("testBuyItemWithExactPrice - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 		assertTrue((this.machine.getCash() == 2) && (this.machine.getProduct(product.getId()).getQuantity() == (Product.maxQuantity-1)));
 	}
 
 	@Test
 	public void testBuyItemWithLessThanPrice() {
-		System.out.println("");
-		System.out.println("testBuyItemWithLessPrice");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -144,23 +134,17 @@ class VendingMachineTest {
 			this.machine.statePayOrder(1);
 			this.machine.stateRetriveOrder();
 		} catch (NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.print();
 		}
 		// Assert
-		System.out.println("testBuyItemWithLessPrice - cash = " + this.machine.getCash());
-		System.out.println("testBuyItemWithLessPrice - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 		assertTrue((this.machine.getCash() == 1) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity));
 	}
 
 	@Test
 	public void testBuyItemWithMoreThanPrice() {
-		System.out.println("");
-		System.out.println("testBuyItemWithMoreThanPrice");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -173,23 +157,17 @@ class VendingMachineTest {
 			this.machine.statePayOrder(5);
 			this.machine.stateRetriveOrder();
 		} catch (NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.print();
 		}
 		// Assert
-		System.out.println("testBuyItemWithMoreThanPrice - cash = " + this.machine.getCash());
-		System.out.println("testBuyItemWithMoreThanPrice - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 		assertTrue((this.machine.getCash() == 2) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity-1));
 	}
 
 	@Test
 	public void testBuyTwiceTheSameItem() {
-		System.out.println("");
-		System.out.println("testBuyTwiceTheSameItem");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -203,23 +181,17 @@ class VendingMachineTest {
 			this.machine.statePayOrder(5);
 			this.machine.stateRetriveOrder();
 		} catch (NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.print();
 		}
 		// Assert
-		System.out.println("testBuyTwiceTheSameItem - cash = " + this.machine.getCash());
-		System.out.println("testBuyTwiceTheSameItem - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 		assertTrue((this.machine.getCash() == 4) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity-2));
 	}
 
 	@Test
 	public void testBuyTwoDifferentItems() {
-		System.out.println("");
-		System.out.println("testBuyTwoDifferentItems");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -235,16 +207,12 @@ class VendingMachineTest {
 			this.machine.statePayOrder(5);
 			this.machine.stateRetriveOrder();
 		} catch (NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.print();
 		}
 		// Assert
-		System.out.println("testBuyTwoDifferentItems - cash = " + this.machine.getCash());
-		//System.out.println("testBuyTwoDifferentItems - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 		assertTrue((this.machine.getCash() == 5) 
 				&& (this.machine.getProduct(product1.getId()).getQuantity() == Product.maxQuantity-1)
 				&& (this.machine.getProduct(product2.getId()).getQuantity() == Product.maxQuantity-1));
@@ -252,8 +220,6 @@ class VendingMachineTest {
 
 	@Test
 	public void testBuyMoreItemsThanAvailable() {
-		System.out.println("");
-		System.out.println("testBuyMoreItemsThanAvailable");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -268,14 +234,10 @@ class VendingMachineTest {
 					this.machine.stateRetriveOrder();
 				});
 
-		System.out.println("testBuyMoreItemsThanAvailable - cash = " + this.machine.getCash());
-		System.out.println("testBuyMoreItemsThanAvailable - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 	}
 
 	@Test
 	public void testBuyItemNotAvailable() {
-		System.out.println("");
-		System.out.println("testBuyItemNotAvailable");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -290,14 +252,10 @@ class VendingMachineTest {
 					this.machine.stateRetriveOrder();
 				});
 
-		System.out.println("testBuyItemNotAvailable - cash = " + this.machine.getCash());
-		System.out.println("testBuyItemNotAvailable - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 	}
 
 	@Test
 	public void testCancelWhileOrdering() {
-		System.out.println("");
-		System.out.println("testCancelWhileOrdering");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -309,23 +267,17 @@ class VendingMachineTest {
 			this.machine.stateAddProduct(product.getId(), 1);
 			this.machine.stateCancelOrder();
 		} catch (NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.print();
 		}
 		// Assert
-		System.out.println("testCancelWhileOrdering - cash = " + this.machine.getCash());
-		System.out.println("testCancelWhileOrdering - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 		assertTrue((this.machine.getCash() == 0) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity));
 	}
 
 	@Test
 	public void testCancelWhilePaying() {
-		System.out.println("");
-		System.out.println("testCancelWhilePaying");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -339,23 +291,17 @@ class VendingMachineTest {
 			this.machine.statePayOrder(1);
 			this.machine.stateCancelOrder();
 		} catch (NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.print();
 		}
 		// Assert
-		System.out.println("testCancelWhilePaying - cash = " + this.machine.getCash());
-		System.out.println("testCancelWhilePaying - quantity " + Product.maxQuantity + " = " + this.machine.getProduct(product.getId()).getQuantity());
 		assertTrue((this.machine.getCash() == 0) && (this.machine.getProduct(product.getId()).getQuantity() == Product.maxQuantity));
 	}
 
 	@Test
 	public void testSoldOutState() {
-		System.out.println("");
-		System.out.println("testSoldOutState");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -377,7 +323,6 @@ class VendingMachineTest {
 			this.machine.statePayOrder(2*Product.maxQuantity);
 			this.machine.stateRetriveOrder();
 		} catch (InitException | NotEnoughProductException | SoldOutException | ProductDoesNotExistException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// Assert
@@ -386,8 +331,6 @@ class VendingMachineTest {
 
 	@Test
 	public void testFullState() {
-		System.out.println("");
-		System.out.println("testFullState");
 		// Arrange
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(new Product(2,"coke.png","Coke"));
@@ -404,7 +347,6 @@ class VendingMachineTest {
 		try {
 			this.machine = new VendingMachine(products);
 		} catch (InitException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// Assert
