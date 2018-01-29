@@ -2,6 +2,8 @@ package gui;
 
 import java.io.File;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -104,6 +106,8 @@ public class MainController implements Initializable {
 	private static boolean paymentPhase = false;
 
 	private List<Product> products = new ArrayList<Product>();
+	
+	NumberFormat formatter = new DecimalFormat("#0.00"); 
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -180,7 +184,7 @@ public class MainController implements Initializable {
 	private void setProduct(Product product, Label price, Label id, ImageView img) {
 		String path = "@./../img/";
 
-		price.setText(product.getPrice() + " €");
+		price.setText(formatter.format(product.getPrice()) + " €");
 		id.setText("" + product.getId());
 		img.setImage(new Image(path + product.getImg()));
 	}
@@ -254,7 +258,7 @@ public class MainController implements Initializable {
 						}
 						vendingMachine.stateOrderComplete();
 						paymentPhase = true;
-						order_field.setText("price: " + price + "€");
+						order_field.setText("price: " + formatter.format(price) + "€");
 						change_field.setText(price-payment + "€ left");
 						checkPayment();
 					} catch(NotEnoughProductException ne) {
@@ -372,12 +376,12 @@ public class MainController implements Initializable {
 		if(payment >= price) {
 			if(price == 0) {
 				change = payment - price;
-				change_field.setText("in: " + change + " €");
+				change_field.setText("in: " + formatter.format(change) + " €");
 			} else {
 				giveChange();
 			}
 		} else {
-			change_field.setText(price-payment + "€ left");
+			change_field.setText(formatter.format(price-payment) + "€ left");
 		}
 	}
 
@@ -392,7 +396,7 @@ public class MainController implements Initializable {
 			e.printStackTrace();
 		}
 
-		change_field.setText("give " + change + " €");
+		change_field.setText("give " + formatter.format(change) + " €");
 		order_field.setText("");
 		//change_field.setText("");
 		price = 0;
