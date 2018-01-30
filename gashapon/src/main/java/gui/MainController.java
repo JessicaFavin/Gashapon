@@ -368,6 +368,7 @@ public class MainController implements Initializable {
 			e.printStackTrace();
 		} catch (NoChangeException e) {
 			payment -= coin;
+			order_field.setText("");
 			change_field.setAlignment(Pos.BASELINE_LEFT);
 			change_field.setText("No change available");
 			change_field.setAlignment(Pos.CENTER);
@@ -380,6 +381,7 @@ public class MainController implements Initializable {
 			if(price == 0) {
 				change = payment - price;
 				change_field.setText("in: " + formatter.format(change) + " €");
+				gaveChange = false;
 			} else {
 				giveChange();
 			}
